@@ -10,7 +10,7 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'src/views'))
 
 app.use(express.static(path.join(__dirname, 'src/views')))
-app.use(express.static('public'))
+app.use(express.static('public')) // public으로 시작
 
 app.use(bodyParser.json())
 app.use('/', mainPageRoute)
