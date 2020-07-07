@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "level": "^6.0.1",
     "level-sublevel": "^6.6.5",
     "nodemon": "^2.0.4",
