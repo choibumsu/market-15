@@ -12,8 +12,8 @@
         postalCode: 112,
         address: '우아한형제들 11층',
         addressDetail: '회의실',
-        isAgree: true,
-        isAgreeMarketing: false,
+        isEssentialTerm: true,
+        isOptionalTerm: false,
       }),
     })
   })

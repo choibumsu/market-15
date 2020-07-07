@@ -1,10 +1,5 @@
 const level = require('level')
-const subLevel = require('level-sublevel')
 
-const db = subLevel(level('./db.js', { valueEncoding: 'json' }))
+const db = level('./db', { valueEncoding: 'json' })
 
-const userDB = db.sublevel('users')
-
-module.exports = {
-  userDB,
-}
+module.exports = db

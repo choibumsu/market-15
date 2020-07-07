@@ -1,7 +1,8 @@
-const { getUserController } = require('./user-ctrl')
+const { postRegisterController, getUserOneController } = require('./user-ctrl')
 const express = require('express')
 const router = express.Router()
 
-router.get('/user', getUserController)
+router.post('/', postRegisterController)
+router.get('/:id', getUserOneController)
 
 module.exports = router

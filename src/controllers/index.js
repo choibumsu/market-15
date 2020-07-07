@@ -1,7 +1,7 @@
-const mainPageRoute = require('./main')
-const userPageRoute = require('./user')
+const mainRoute = require('./main')
+const userRoute = require('./user')
 
 module.exports = {
-  mainPageRoute,
-  userPageRoute,
+  mainRoute,
+  userRoute,
 }

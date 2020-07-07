@@ -128,3 +128,6 @@ dist
 # css dist
 public/stylesheets/css
 public/stylesheets/css/*
+
+# db
+db
