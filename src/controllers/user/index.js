@@ -1,7 +1,7 @@
-const { getUserController } = require('./user-ctrl')
+const { postUserAuth } = require('./user-ctrl')
 const express = require('express')
 const router = express.Router()
 
-router.get('/user', getUserController)
+router.post('/auth', postUserAuth)
 
 module.exports = router
