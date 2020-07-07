@@ -5,13 +5,13 @@ exports.postUserAuth = async (req, res, next) => {
     const { id, password } = req.body
     const user = await getUserOne(id)
 
-    if (user === false) {
-      res.json(false)
+    if (!user) {
+      res.status(404).json(false)
       return
     }
 
     if (user.password !== password) {
-      res.json(false)
+      res.status(403).json(false)
       return
     }
 
