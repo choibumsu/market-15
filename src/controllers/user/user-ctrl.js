@@ -24,3 +24,27 @@ exports.postUserAuth = async (req, res, next) => {
     res.status(404).json()
   }
 }
+
+const { getUserOne } = require('../../model')
+
+exports.postUserDuplication = async (req, res, next) => {
+  try {
+    const { id } = req.body
+    const user = await getUserOne(id)
+
+    if (user) {
+      res.json({
+        result: 'disallow',
+      })
+      return
+    }
+
+    res.json({
+      result: 'allow',
+    })
+  } catch (e) {
+    // next(e)
+    console.log(e)
+    res.status(404).json()
+  }
+}
