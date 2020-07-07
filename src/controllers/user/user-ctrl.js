@@ -25,8 +25,6 @@ exports.postUserAuth = async (req, res, next) => {
   }
 }
 
-const { getUserOne } = require('../../model')
-
 exports.postUserDuplication = async (req, res, next) => {
   try {
     const { id } = req.body
