@@ -19,6 +19,8 @@ exports.postUserAuth = async (req, res, next) => {
       result: user,
     })
   } catch (e) {
-    next(e)
+    // next(e)
+    console.log(e)
+    res.status(404).json()
   }
 }
