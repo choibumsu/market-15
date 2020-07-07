@@ -1,15 +1,21 @@
 const express = require('express')
 const path = require('path')
+const { mainPageRoute, userPageRoute } = require('./src/controllers')
+const bodyParser = require('body-parser')
 const app = express()
-const port = 3000
+const { SERVER_PORT } = require('./src/utils/constants')
 
 //pug
 app.set('view engine', 'pug')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, 'src/views'))
 
-app.use(express.static(path.join(__dirname, 'views')))
+app.use(express.static(path.join(__dirname, 'src/views')))
 app.use(express.static('public'))
 
-app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
+app.use(bodyParser.json())
+app.use('/', mainPageRoute)
+app.use('/user', userPageRoute)
+
+app.listen(SERVER_PORT, () =>
+  console.log(`Example app listening at http://localhost:${SERVER_PORT}`)
 )
