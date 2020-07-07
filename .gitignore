@@ -124,3 +124,7 @@ dist
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node
+
+# css dist
+public/stylesheets/css
+public/stylesheets/css/*
