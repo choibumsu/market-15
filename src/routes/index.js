@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/join', (req, res) => {
+router.get('/join/:path', (req, res) => {
+  const { path } = req.params
+  if (path === 'success') {
+    res.render('welcome-page')
+  }
   res.render('join-test')
 })
 
