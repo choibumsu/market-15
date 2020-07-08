@@ -1,12 +1,17 @@
 doctype html
-| PASTE YOUR HTML CODE HERE
 head
-  title Pug
-  script(type='text/javascript').
-  link(rel='stylesheet', href='stylesheets/css/common/style.css')
-h1 Pug - node template engine
-#container.col
-  p You are amazing
-  p Pug is a terse and simple templating language.
-button.test hi
-script(type='module' src='')
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/static/stylesheets/css/main.css')
+  link(rel='stylesheet' href='/static/stylesheets/css/reset.css')
+  link(rel='stylesheet' href='/static/stylesheets/css/base.css')
+  title &#xBA54;&#xC778; - &#xBC30;&#xBBFC;&#xC0C1;&#xD68C;
+main.main
+  section.wrap
+    h1 &#xC0AC;&#xC7A5;&#xB2D8;, &#xB85C;&#xADF8;&#xC778;&#xD574;&#xC8FC;&#xC138;&#xC694;!
+    button.woowa-btn(type='button') &#xBC30;&#xBBFC;&#xC0AC;&#xC7A5;&#xB2D8;&#xAD11;&#xC7A5; &#xB85C;&#xADF8;&#xC778;
+    nav
+      a(href='https://www.youtube.com/channel/UC-mOekGSesms0agFntnQang') &#xC544;&#xC774;&#xB514; / &#xBE44;&#xBC00;&#xBC88;&#xD638; &#xCC3E;&#xAE30;
+      span.seperate-bar |
+      a(href='/join') &#xD68C;&#xC6D0;&#xAC00;&#xC785;
+script(type='module' src='/static/javascripts/pages/MainPage.js')

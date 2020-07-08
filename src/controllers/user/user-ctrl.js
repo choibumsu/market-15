@@ -50,8 +50,6 @@ exports.postUserDuplicationController = async (req, res, next) => {
 
     res.status(200).json()
   } catch (e) {
-    // next(e)
-    console.log(e)
-    res.status(404).json()
+    next(e)
   }
 }
