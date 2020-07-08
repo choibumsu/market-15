@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const { mainRoute, userRoute } = require('./src/controllers')
 const renderRoute = require('./src/routes')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const app = express()
 const { SERVER_PORT } = require('./src/utils/constants')
@@ -9,9 +10,19 @@ const { SERVER_PORT } = require('./src/utils/constants')
 //pug
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'src/views'))
+
 app.use(express.static(path.join(__dirname, 'src/views')))
 
 app.use(bodyParser.json())
+
+//session
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+)
 
 app.use(renderRoute) // serving pug
 app.use('/', mainRoute)
