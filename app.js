@@ -3,6 +3,7 @@ const path = require('path')
 const { mainRoute, userRoute } = require('./src/controllers')
 const renderRoute = require('./src/routes')
 const session = require('express-session')
+const LevelStore = require('level-session-store')(session)
 const bodyParser = require('body-parser')
 const app = express()
 const { SERVER_PORT } = require('./src/utils/constants')
@@ -21,6 +22,7 @@ app.use(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
+    store: new LevelStore(),
   })
 )
 
