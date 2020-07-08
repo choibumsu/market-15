@@ -5,6 +5,10 @@ exports.postUserAuth = async (req, res, next) => {
     const { id, password } = req.body
     const user = await getUserOne(id)
 
+    if (req.session.userId) {
+      console.log(req.session.userId)
+    }
+
     if (!user) {
       res.status(404).json(false)
       return
@@ -15,6 +19,7 @@ exports.postUserAuth = async (req, res, next) => {
       return
     }
 
+    req.session.userId = id
     res.json({
       result: user,
     })
@@ -23,4 +28,8 @@ exports.postUserAuth = async (req, res, next) => {
     console.log(e)
     res.status(404).json()
   }
+}
+
+exports.test = (req, res) => {
+  res.render('test')
 }
