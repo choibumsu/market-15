@@ -25,7 +25,7 @@ exports.postUserAuth = async (req, res, next) => {
   }
 }
 
-exports.postUserDuplication = async (req, res, next) => {
+exports.postUserDuplicationController = async (req, res, next) => {
   try {
     const { id } = req.body
     const user = await getUserOne(id)
