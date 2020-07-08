@@ -15,9 +15,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:sass:watch": "nodemon --watch public/stylesheets/scss/*.scss --exec \"npm run build:sass\"",
-    "build:sass": "sass public/stylesheets/scss:public/stylesheets/css",
-    "dev": "npm-run-all --parallel build:sass:watch start:watch",
+    "build:sass": "sass --watch public/stylesheets/scss:public/stylesheets/css",
+    "dev": "npm-run-all --parallel build:sass start:watch",
     "start:watch": "nodemon app.js",
     "start": "node app.js"
   },

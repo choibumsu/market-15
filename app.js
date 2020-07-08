@@ -10,13 +10,13 @@ const { SERVER_PORT } = require('./src/utils/constants')
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'src/views'))
 app.use(express.static(path.join(__dirname, 'src/views')))
-app.use(express.static('public')) // 상대경로 지정
 
 app.use(bodyParser.json())
 
 app.use(renderRoute) // serving pug
 app.use('/', mainRoute)
 app.use('/user', userRoute)
+app.use('/static', express.static(__dirname + '/public'))
 
 app.use((err, req, res, next) => {
   // 에러 처리 부분
