@@ -31,15 +31,11 @@ exports.postUserDuplicationController = async (req, res, next) => {
     const user = await getUserOne(id)
 
     if (user) {
-      res.json({
-        result: 'disallow',
-      })
+      res.status(409).json()
       return
     }
 
-    res.json({
-      result: 'allow',
-    })
+    res.status(200).json()
   } catch (e) {
     // next(e)
     console.log(e)
