@@ -23,4 +23,18 @@
     const result = await response.json()
     console.log('result', result)
   })
+
+  const $loginTestButton = document.querySelector('.test3')
+  $loginTestButton.addEventListener('click', async () => {
+    const response = await fetch('/user/auth', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        id: 'donguk',
+        password: '1234',
+      }),
+    })
+    const result = await response.json()
+    alert(`안녕하세요 ${result.name}님`)
+  })
 })()

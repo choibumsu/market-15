@@ -1,21 +1,16 @@
-const { getUserOne, postRegister } = require('../../model')
+const { getUserOne, postRegister, verifyPassword } = require('../../model/user')
 
 exports.postUserAuthController = async (req, res, next) => {
   try {
     const { id, password } = req.body
     const user = await getUserOne(id)
-
     if (!user) {
       res.status(404).json(false)
     }
-
-    if (user.password !== password) {
+    if (!(await verifyPassword(password, user.password, user.salt))) {
       res.status(403).json(false)
     }
-
-    res.json({
-      result: user,
-    })
+    res.status(200).json({ name: user.name })
   } catch (e) {
     next(e)
   }
@@ -35,7 +30,7 @@ exports.getUserOneController = async (req, res, next) => {
     const { id } = req.params
     const user = await getUserOne(id)
     if (!user) {
-      res.status(404).json()
+      res.status(404).json(false)
     }
     res.status(200).json(user)
   } catch (e) {
