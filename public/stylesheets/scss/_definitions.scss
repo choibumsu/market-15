@@ -1,4 +1,4 @@
-//font
+/* font */
 /* noto-sans-kr-regular - latin */
 @font-face {
   font-family: 'Noto Sans KR';
@@ -24,12 +24,20 @@
 
 $font-main: 'Noto Sans KR';
 
-//colors
+/* colors */
+// input normal border, placeholder
 $color-gray-300: rgb(220, 220, 220);
-$color-gray-500: rgb(138, 138, 138);
-$color-gray-600: rgb(126, 126, 126);
+
+// help text, button border
+$color-gray-500: rgb(130, 130, 130);
+
+// terms
+$color-gray-600: rgb(100, 100, 100);
+
+// outter border
 $color-gray-700: rgb(70, 70, 70);
-$color-gray-800: rgb(60, 60, 60);
+
+// plain text, title, etc black text
 $color-gray-900: rgb(20, 20, 20);
 
 $color-main: rgb(22, 98, 254);
