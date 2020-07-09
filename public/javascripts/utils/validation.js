@@ -1,16 +1,19 @@
 import api from '../apis/api.js'
 import {
-  isNameEmpty,
+  isIdEmpty,
+  checkId,
   checkHasEnglish,
   checkHasNumber,
-  checkName,
   isPasswordEmpty,
   checkPassword,
   isPasswordConfirmEmpty,
+  isNameEmpty,
+  checkMinNameLength,
+  checkName,
 } from './regex.js'
 
 const checkMethods = {
-  id: [isNameEmpty, checkHasEnglish, checkName, validateIdDuplication],
+  id: [isIdEmpty, checkHasEnglish, checkId, validateIdDuplication],
   password: [isPasswordEmpty, checkHasEnglish, checkHasNumber, checkPassword],
   passwordConfirm: [
     isPasswordConfirmEmpty,
@@ -18,7 +21,7 @@ const checkMethods = {
     checkHasNumber,
     checkIsSameWithPassword,
   ],
-  email: [],
+  name: [isNameEmpty, checkMinNameLength, checkName],
 }
 
 // id validation

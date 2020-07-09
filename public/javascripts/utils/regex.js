@@ -20,15 +20,15 @@ export const checkHasNumber = (value) =>
   !regEx.number.test(value) ? '숫자가 하나 이상 포함되어야 합니다.' : undefined
 
 // id
-export const isNameEmpty = (value) =>
-  isEmpty(value) ? '아이디를 입력해 주세요.' : undefined
+export const isIdEmpty = (value) =>
+  isEmpty(value) ? '아이디를 입력해주세요.' : undefined
 
-export const checkName = (value) =>
+export const checkId = (value) =>
   !regEx.id.test(value) ? '유효하지 않은 아이디입니다.' : undefined
 
 // password
 export const isPasswordEmpty = (value) =>
-  isEmpty(value) ? '비밀번호를 입력해 주세요.' : undefined
+  isEmpty(value) ? '비밀번호를 입력해주세요.' : undefined
 
 export const checkPassword = (value) =>
   !regEx.password.test(value)
@@ -37,7 +37,19 @@ export const checkPassword = (value) =>
 
 // passwordConfirm
 export const isPasswordConfirmEmpty = (value) =>
-  isEmpty(value) ? '비밀번호 확인을 입력해 주세요.' : undefined
+  isEmpty(value) ? '비밀번호 확인을 입력해주세요.' : undefined
+
+// name
+export const isNameEmpty = (value) =>
+  isEmpty(value) ? '이름을 입력해주세요.' : undefined
+
+export const checkMinNameLength = (value) =>
+  value.length < 2 ? '2자 이상으로 입력해주세요.' : undefined
+
+export const checkName = (value) =>
+  !regEx.name.test(value)
+    ? '이름에 특수문자, 숫자는 입력하실 수 없습니다. 다시 입력해 주세요.'
+    : undefined
 
 export const phone = (value) =>
   !regEx.phone.test(value) ? '유효하지 않은 휴대전화번호입니다.' : undefined
