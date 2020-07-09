@@ -12,38 +12,38 @@ main#signup-container
       img.logo(src='/static/images/logo.png' alt='logo')
     .title 필수 정보를 입력해주세요.
     .input-wrapper
-      input(type='text' name='id' placeholder='아이디* (4~20자)')
+      input(type='text' name='id' data-type='$idInput' placeholder='아이디* (4~20자)')
       .error-message 예시 에러 메세지입니다.
       .allow-message 입력하신 아이디로 사용이 가능합니다.
     .input-wrapper
 
-      input(type='password' name='password' placeholder='비밀번호* (영문+숫자, 8~20자)')
+      input(type='password' name='password' data-type='$passwordInput' placeholder='비밀번호* (영문+숫자, 8~20자)')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(type='password' name='passwordConfirm' placeholder='비밀번호 확인')
+      input(type='password' name='passwordConfirm' data-type='$passwordConfirmInput' placeholder='비밀번호 확인')
 
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.email-wrapper
-      input.email(type='text' name='emailPrefix' placeholder='이메일 앞자리*')
+      input.email(type='text' name='emailPrefix' data-type='$emailPrefixInput' placeholder='이메일 앞자리*')
       span.at @
-      input.email.no-change(disabled='' name='emailSuffix' type='text' placeholder='이메일 뒷자리*')
+      input.email.no-change(disabled='' name='emailSuffix' data-type='$emailSuffixInput' type='text' placeholder='이메일 뒷자리*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      select
+      select.selectEmail
         option(disabled='' selected='' value='') 이메일 선택
-        option(value='') naver.com
-        option(value='') gmail.com
-        option(value='') 직접입력
+        option(value='naver.com') naver.com
+        option(value='gmail.com') gmail.com
+        option(value='self') 직접입력
     .input-wrapper
-      input(type='text' name='name' placeholder='이름*')
+      input(type='text' name='name' data-type='$nameInput' placeholder='이름*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper
-      input.short(type='text' name='phone' placeholder='휴대폰*')
+      input.short(type='tel' name='phone' data-type='$phoneInput' placeholder='휴대폰*')
       button.input-button.phone-auth-btn 인증받기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper.dp-none
       .time-input-wrapper
-        input.short(type='text' placeholder='인증번호 6자리 입력')
+        input.short(type='tel' name='phoneAuth' data-type='$phoneAuthInput' placeholder='인증번호 6자리 입력')
         .time 02:00
       button.input-button.phone-auth-btn.active 확인
       .error-message 예시 에러 메세지입니다.
@@ -73,18 +73,18 @@ main#signup-container
   section.term-form
     .term-wrapper.all-term
       .checkbox-wrapper
-        input#all(type='checkbox')
+        input#all(type='checkbox' name='all')
         label.term-title.strong(for='all') 전체 약관에 동의합니다
     .term-wrapper.essential-term
       .checkbox-wrapper
-        input#essentail(type='checkbox')
+        input#essentail(type='checkbox' name='essential')
         label.term-title(for='essentail') 필수 약관에 동의합니다.
       .sub-wrapper.term-wrapper
         .term-link 배민사장님장 이용약관
         .term-link 개인정보 수집이용 동의
     .term-wrapper.optional-term
       .checkbox-wrapper
-        input#optional(type='checkbox')
+        input#optional(type='checkbox' name='optional')
         label.term-title(for='optional') 광고성 정보 수신 동의 (선택)
       p.sub-wrapper.description
         | 배민사장님광장 회원에게 제공하는 서비스의 광고성 정보를 수신합니다.
