@@ -1,15 +1,24 @@
 import api from '../apis/api.js'
 import {
   isNameEmpty,
-  checkEnglishInName,
+  checkHasEnglish,
+  checkHasNumber,
   checkName,
   isPasswordEmpty,
   checkPassword,
+  isPasswordConfirmEmpty,
 } from './regex.js'
 
-const inputInfos = {
-  id: [isNameEmpty, checkEnglishInName, checkName, validateIdDuplication],
-  password: [isPasswordEmpty, checkPassword],
+const checkMethods = {
+  id: [isNameEmpty, checkHasEnglish, checkName, validateIdDuplication],
+  password: [isPasswordEmpty, checkHasEnglish, checkHasNumber, checkPassword],
+  passwordConfirm: [
+    isPasswordConfirmEmpty,
+    checkHasEnglish,
+    checkHasNumber,
+    checkIsSameWithPassword,
+  ],
+  email: [],
 }
 
 // id validation
@@ -21,10 +30,22 @@ async function validateIdDuplication(id) {
   return undefined
 }
 
+// pw
+function checkIsSameWithPassword(passwordConfirmValue) {
+  const $passwordInput = document.querySelector('input[name=password]')
+  if (!$passwordInput) {
+    return '비밀번호를 먼저 입력해주세요.'
+  }
+  if ($passwordInput.value !== passwordConfirmValue) {
+    return '비밀번호와 비밀번호 확인이 일치하지 않습니다.'
+  }
+  return undefined
+}
+
 // common
 export const verrifyInput = async (name, value) => {
   const errors = []
-  const validationMethods = inputInfos[name]
+  const validationMethods = checkMethods[name]
   await Promise.all(
     validationMethods.map(async (method) => {
       let errorMessage = method(value)
