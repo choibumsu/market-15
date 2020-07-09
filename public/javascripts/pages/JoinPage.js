@@ -5,10 +5,11 @@ function JoinPage(props) {
   if (new.target !== JoinPage) {
     return new JoinPage(props)
   }
-  const { essentialFormSelector } = props
+  const { essentialFormSelector, addressFormSelector } = props
 
   this.init = () => {
     this.$essentialForm = document.querySelector(essentialFormSelector)
+    this.$addressForm = document.querySelector(addressFormSelector)
     this.bindEvent()
   }
 
@@ -32,14 +33,49 @@ function JoinPage(props) {
         $inputWrapper.classList.add(CLASS_NAME.SUCCESS_CLASS)
       } // id input만 success message
     })
+
+    const $addressSearchBtn = this.$addressForm.querySelector(
+      '.address-search-btn'
+    )
+    $addressSearchBtn.addEventListener('click', async (e) => {
+      searchAddress(this.$addressForm)
+    })
   }
 
   this.init()
 }
 
+const searchAddress = ($addressForm) => {
+  new daum.Postcode({
+    component: '',
+    oncomplete: (data) => {
+      const postalCode = data.zonecode
+      const address =
+        data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress
+
+      const $postalInput = $addressForm.querySelector('input[name=postal]')
+      const $addressInput = $addressForm.querySelector('input[name=address]')
+      const $addressDetailInput = $addressForm.querySelector(
+        'input[name=address-detail]'
+      )
+      const $previewWrapper = $addressForm.querySelector('.preview-wrapper')
+      const $addressPreview = $addressForm.querySelector('.address-preview')
+
+      $postalInput.value = postalCode
+      $addressInput.value = address
+      $addressDetailInput.value = ''
+      $previewWrapper.classList.remove(CLASS_NAME.DISPLAY_NONE_CLASS)
+      $addressPreview.innerHTML = data.jibunAddress
+
+      console.log(data)
+    },
+  }).open()
+}
+
 try {
   new JoinPage({
     essentialFormSelector: '.essential-form',
+    addressFormSelector: '.address-form',
   })
 } catch (e) {
   console.error(e)
