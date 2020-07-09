@@ -1,4 +1,4 @@
-@import '_definitions';
+@import 'base';
 
 body {
   display: flex;
@@ -7,7 +7,6 @@ body {
 
 #signup-container {
   width: 325px;
-  position: absolute;
   padding: 80px 0 60px 0;
 
   input[type='checkbox'] {
@@ -18,8 +17,9 @@ body {
   }
 
   .input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 12px;
-    position: relative;
 
     input,
     select {
@@ -74,19 +74,23 @@ body {
     }
 
     &.error {
-      margin-bottom: 38px;
+      margin-bottom: 18px;
 
       input,
       select {
         border-color: $color-error;
+
+        &.no-change {
+          border-color: $color-gray-300;
+        }
       }
 
       .error-message {
         display: block;
+        width: 100%;
         color: $color-error;
         font-size: 14px;
-        position: absolute;
-        bottom: -22px;
+        margin-top: 6px;
       }
     }
 
@@ -103,7 +107,6 @@ body {
     }
 
     &.email-wrapper {
-      display: flex;
       justify-content: space-between;
       align-items: center;
 
@@ -154,10 +157,10 @@ body {
     .logo-wrapper {
       display: flex;
       justify-content: center;
+      margin-bottom: 40px;
 
       .logo {
         width: 220px;
-        margin-bottom: 40px;
       }
     }
 

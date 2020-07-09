@@ -46,6 +46,7 @@ exports.postUserDuplicationController = async (req, res, next) => {
       res.status(409).json()
       return
     }
+    req.session.userId = id
     res.status(200).json()
   } catch (e) {
     next(e)
