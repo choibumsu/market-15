@@ -5,6 +5,7 @@ head
   title 배민사장님광장
   link(rel='stylesheet' href='/static/stylesheets/css/reset.css')
   link(rel='stylesheet' href='/static/stylesheets/css/signup.css')
+  script(src='https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
 main#signup-container
   section.essential-form
     .logo-wrapper
@@ -55,18 +56,20 @@ main#signup-container
       label.option-label(for='address-check') 선택 정보를 입력하시겠어요?
       .term-link 내용보기
     .input-wrapper.button-input-wrapper
-      input.short(disabled='' type='text' placeholder='우편번호')
-      button.input-button.phone-auth-btn 주소찾기
+      input.short(disabled='' type='number' name='postal' placeholder='우편번호')
+      button.input-button.address-search-btn 주소찾기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(disabled='' type='text' placeholder='주소')
+      input(disabled='' type='text' name='address' placeholder='주소')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(type='text' placeholder='상세주소')
+      input(disabled='' type='text' name='address-detail' placeholder='상세주소')
       .error-message 예시 에러 메세지입니다.
     .preview-wrapper.dp-none
       .address-label 지번
-      .address-preview 서울특별시 송파구 장은빌딩
+      .address-preview
+        span.pre
+        span.detail
   section.term-form
     .term-wrapper.all-term
       .checkbox-wrapper
