@@ -66,7 +66,10 @@ export default function LoginPage(props) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
       this.$errorNode.innerHTML = ERROR_CASES.common
 
-      this.$inputs.forEach(($input) => ($input.value = ''))
+      this.$inputs.forEach(($input) => {
+        $input.value = ''
+        if ($input.name === 'id') $input.focus()
+      })
       return
     }
 
