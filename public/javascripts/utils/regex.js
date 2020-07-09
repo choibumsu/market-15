@@ -51,10 +51,15 @@ export const checkName = (value) =>
     ? '이름에 특수문자, 숫자는 입력하실 수 없습니다. 다시 입력해 주세요.'
     : undefined
 
+// email
 export const isEmailEmpty = (value) =>
   isEmpty(value) ? '이메일을 확인해주세요.' : undefined
 
-export const phone = (value) =>
+// phone
+export const isPhoneEmpty = (value) =>
+  isEmpty(value) ? '휴대전화번호를 입력해주세요.' : undefined
+
+export const checkPhone = (value) =>
   !regEx.phone.test(value) ? '유효하지 않은 휴대전화번호입니다.' : undefined
 
 export const tel = (value) =>

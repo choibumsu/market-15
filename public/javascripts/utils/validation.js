@@ -11,6 +11,8 @@ import {
   checkMinNameLength,
   checkName,
   isEmailEmpty,
+  isPhoneEmpty,
+  checkPhone,
 } from './regex.js'
 
 const checkMethods = {
@@ -25,6 +27,7 @@ const checkMethods = {
   name: [isNameEmpty, checkMinNameLength, checkName],
   emailPrefix: [isEmailEmpty],
   emailSuffix: [isEmailEmpty],
+  phone: [isPhoneEmpty, checkPhone],
 }
 
 // id validation
