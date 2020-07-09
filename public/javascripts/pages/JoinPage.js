@@ -1,18 +1,29 @@
-import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
+import { TAG_NAME, CLASS_NAME, SELECT_VALUE } from '../utils/constants.js'
 import { verrifyInput } from '../utils/validation.js'
 
 function JoinPage(props) {
   if (new.target !== JoinPage) {
     return new JoinPage(props)
   }
-  const { essentialFormSelector } = props
+  const { essentialFormSelector, selectEmailSelector } = props
 
   this.init = () => {
     this.$essentialForm = document.querySelector(essentialFormSelector)
+    this.$selectEmail = document.querySelector(selectEmailSelector)
     this.bindEvent()
   }
 
   this.bindEvent = () => {
+    this.$selectEmail.addEventListener('change', ({ target }) => {
+      const $emailSuffix = document.querySelector('input[name=emailSuffix]')
+      if (target.value === SELECT_VALUE.SELF) {
+        $emailSuffix.disabled = false
+        return
+      }
+      $emailSuffix.disabled = true
+      $emailSuffix.value = target.value
+    }) // bind event to email input
+
     this.$essentialForm.addEventListener('focusout', async (e) => {
       if (e.target.tagName !== TAG_NAME.INPUT) {
         return
@@ -40,6 +51,7 @@ function JoinPage(props) {
 try {
   new JoinPage({
     essentialFormSelector: '.essential-form',
+    selectEmailSelector: '.selectEmail',
   })
 } catch (e) {
   console.error(e)

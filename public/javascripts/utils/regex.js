@@ -51,24 +51,12 @@ export const checkName = (value) =>
     ? '이름에 특수문자, 숫자는 입력하실 수 없습니다. 다시 입력해 주세요.'
     : undefined
 
+export const isEmailEmpty = (value) =>
+  isEmpty(value) ? '이메일을 확인해주세요.' : undefined
+
 export const phone = (value) =>
   !regEx.phone.test(value) ? '유효하지 않은 휴대전화번호입니다.' : undefined
 
-export const required = (elementName, value) => {
-  if (!isEmpty(value)) {
-    return undefined
-  }
-  const errorMessage = {
-    id: '아이디를 입력해 주세요.',
-    password: '비밀번호를 입력해 주세요.',
-    passwordConfirm: '비밀번호 확인을 위해 한번 더 입력해 주세요.',
-    emailPrefix: '이메일 주소를 입력해 주세요.',
-    emailSuffix: '이메일 주소를 입력해 주세요.',
-    name: '이름을 입력해 주세요.',
-    phone: '휴대폰 번호를 입력해 주세요.',
-  }
-  return errorMessage[elementName]
-}
 export const tel = (value) =>
   isEmpty(value) || !regEx.tel.test(value)
     ? '유효하지 않은 전화번호입니다.'

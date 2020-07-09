@@ -24,12 +24,13 @@ main#signup-container
       input.email(type='text' name='emailPrefix' placeholder='이메일 앞자리*')
       span.at @
       input.email(disabled='' name='emailSuffix' type='text' placeholder='이메일 뒷자리*')
+      .error-message 예시 에러 메시지입니다.
     .input-wrapper
-      select
+      select.selectEmail
         option(disabled='' selected='' value='') 이메일 선택
-        option(value='') naver.com
-        option(value='') gmail.com
-        option(value='') 직접입력
+        option(value='naver.com') naver.com
+        option(value='gmail.com') gmail.com
+        option(value='self') 직접입력
     .input-wrapper
       input(type='text' name='name' placeholder='이름*')
       .error-message 예시 에러 메세지입니다.

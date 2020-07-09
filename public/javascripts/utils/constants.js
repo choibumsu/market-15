@@ -1,5 +1,10 @@
 export const TAG_NAME = {
   INPUT: 'INPUT',
+  SELECT: 'SELECT',
+}
+
+export const SELECT_VALUE = {
+  SELF: 'self',
 }
 
 export const CLASS_NAME = {

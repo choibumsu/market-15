@@ -10,6 +10,7 @@ import {
   isNameEmpty,
   checkMinNameLength,
   checkName,
+  isEmailEmpty,
 } from './regex.js'
 
 const checkMethods = {
@@ -22,6 +23,8 @@ const checkMethods = {
     checkIsSameWithPassword,
   ],
   name: [isNameEmpty, checkMinNameLength, checkName],
+  emailPrefix: [isEmailEmpty],
+  emailSuffix: [isEmailEmpty],
 }
 
 // id validation
