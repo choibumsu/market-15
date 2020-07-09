@@ -46,9 +46,18 @@
         top: 15px;
         bottom: 10px;
       }
-
-      .first-child {
-        margin-top: 0px !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .info-wrapper:first-child {
+        .sub-title {
+          margin-top: 0px;
+        }
+      }
+      .info-wrapper:last-child {
+        .sub-title {
+          margin-top: 20px;
+        }
       }
 
       .sub-title {
