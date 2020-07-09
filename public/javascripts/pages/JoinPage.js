@@ -8,6 +8,7 @@ import {
   SelectEmail,
   PhoneInput,
   PhoneAuthInput,
+  AddressForm,
   TermForm,
 } from '../components/join/index.js'
 import { Timer } from '../components/common/index.js'
@@ -69,7 +70,9 @@ function JoinPage({ sectionOneSelector }) {
       updateFormValue: this.setState,
       stopTimer: this.timer.deleteCount,
     })
-
+    this.$addressForm = new AddressForm({
+      selector: '.address-form',
+    })
     this.$termForm = new TermForm({
       selector: '.term-form',
     })
