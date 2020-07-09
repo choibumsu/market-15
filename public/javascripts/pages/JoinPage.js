@@ -6,13 +6,23 @@ function JoinPage(props) {
   if (new.target !== JoinPage) {
     return new JoinPage(props)
   }
-  const { essentialFormSelector, selectEmailSelector, phoneSelector } = props
+  const {
+    essentialFormSelector,
+    selectEmailSelector,
+    phoneSelector,
+    phoneAuhSelector,
+    timerInputWrapperSelector,
+  } = props
 
   this.init = () => {
     this.$essentialForm = document.querySelector(essentialFormSelector)
     this.$selectEmail = document.querySelector(selectEmailSelector)
     this.$phoneInput = document.querySelector(phoneSelector)
+    this.$phoneAuthInput = document.querySelector(phoneAuhSelector)
     this.$phoneButton = this.$phoneInput.nextElementSibling
+    this.$phoneAuthButton = document.querySelector(
+      timerInputWrapperSelector
+    ).nextElementSibling
     this.bindEvent()
   }
 
@@ -61,7 +71,7 @@ function JoinPage(props) {
     }
 
     const onClickPhoneButton = (e) => {
-      if (!e.target.classList.contains('active')) {
+      if (!e.target.classList.contains(CLASS_NAME.ACTIVE_CLASS)) {
         return
       }
       const $timeInputWrapper = document.querySelector('.time-input-wrapper')
@@ -74,13 +84,33 @@ function JoinPage(props) {
         })
         return
       }
-      this.timer.setCount()
+      this.timer.setCount() // timer 처음부터 다시 시작.
+    }
+
+    const onClickPhoneAuthHandler = (e) => {
+      const $inputWrapper = e.target.closest('.input-wrapper')
+      if (this.$phoneAuthInput.value !== '123456') {
+        // 123456 임시비밀번호
+        $inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
+        const $errorDiv = this.$phoneAuthButton.nextElementSibling
+        $errorDiv.innerHTML = '인증번호가 올바르지 않습니다.'
+        return
+      }
+      $inputWrapper.classList.remove(CLASS_NAME.ERROR_CLASS)
+      this.timer.deleteCount()
+      $inputWrapper.classList.add('dp-none') // 인증 인풋 dp none
+      this.$phoneInput.disabled = true // input disable
+      this.$phoneButton.classList.remove('active')
+      this.$phoneButton.innerHTML = '인증완료'
     }
 
     this.$essentialForm.addEventListener('focusout', onValidateInputHandler)
     this.$selectEmail.addEventListener('change', onChangeSelectTagHandler) // bind event to email input
     this.$phoneInput.addEventListener('keyup', onReplacePhoneHandler) // 숫자만 입력
+    // this.$phoneInput.addEventListener('keyup', onChangePhoneInputHandler) // 휴대폰 정규식 통과하면 버튼 active
     this.$phoneButton.addEventListener('click', onClickPhoneButton)
+    this.$phoneAuthInput.addEventListener('keyup', onReplacePhoneHandler)
+    this.$phoneAuthButton.addEventListener('click', onClickPhoneAuthHandler)
   }
 
   this.init()
@@ -90,7 +120,9 @@ try {
   new JoinPage({
     essentialFormSelector: '.essential-form',
     selectEmailSelector: '.selectEmail',
-    phoneSelector: 'input[type=tel]',
+    phoneSelector: 'input[name=phone]',
+    phoneAuhSelector: 'input[name=phoneAuth]',
+    timerInputWrapperSelector: '.time-input-wrapper',
   })
 } catch (e) {
   console.error(e)

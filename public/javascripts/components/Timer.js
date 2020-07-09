@@ -25,13 +25,14 @@ export default function Timer(props) {
   this.setCount = () => {
     this.initCount = 121
     if (this.countPerSeconds) {
-      this.deleteCount()
+      this.deleteCount() // 기존의 Web API 삭제
     }
-
     this.countPerSeconds = setInterval(() => {
-      if (this.initCount > 0) {
-        this.initCount -= 1
+      if (this.initCount === 0) {
+        // ... 모달 오픈
+        reutrn
       }
+      this.initCount -= 1
       this.$target.innerHTML = `${getMinute(this.initCount)}:${getSeconds(
         this.initCount
       )}`

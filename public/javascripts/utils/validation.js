@@ -13,6 +13,8 @@ import {
   isEmailEmpty,
   isPhoneEmpty,
   checkPhone,
+  isPhoneAuthEmpty,
+  checkPhoneAuth,
 } from './regex.js'
 
 const checkMethods = {
@@ -28,6 +30,7 @@ const checkMethods = {
   emailPrefix: [isEmailEmpty],
   emailSuffix: [isEmailEmpty],
   phone: [isPhoneEmpty, checkPhone],
+  phoneAuth: [isPhoneAuthEmpty, checkPhoneAuth],
 }
 
 // id validation

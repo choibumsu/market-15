@@ -10,4 +10,5 @@ export const SELECT_VALUE = {
 export const CLASS_NAME = {
   ERROR_CLASS: 'error',
   SUCCESS_CLASS: 'success',
+  ACTIVE_CLASS: 'active',
 }
