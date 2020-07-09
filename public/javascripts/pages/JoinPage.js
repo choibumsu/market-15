@@ -10,6 +10,7 @@ function JoinPage(props) {
   this.init = () => {
     this.$essentialForm = document.querySelector(essentialFormSelector)
     this.$addressForm = document.querySelector(addressFormSelector)
+    this.$addressCheckInput = this.$addressForm.querySelector('#address-check')
     this.bindEvent()
   }
 
@@ -34,11 +35,44 @@ function JoinPage(props) {
       } // id input만 success message
     })
 
+    // 선택 정보 입력 활성화 이벤트 등록
+    this.$addressCheckInput.addEventListener('change', (e) => {
+      const isChecked = e.target.checked
+      const $addressSearchBtn = this.$addressForm.querySelector(
+        '.address-search-btn'
+      )
+      const $addressDetailInput = this.$addressForm.querySelector(
+        'input[name=address-detail]'
+      )
+
+      if (isChecked) {
+        $addressSearchBtn.classList.add(CLASS_NAME.ACTIVE_CLASS)
+        $addressDetailInput.disabled = false
+        return
+      }
+
+      const $postalInput = this.$addressForm.querySelector('input[name=postal]')
+      const $addressInput = this.$addressForm.querySelector(
+        'input[name=address]'
+      )
+      const $previewWrapper = this.$addressForm.querySelector(
+        '.preview-wrapper'
+      )
+
+      $postalInput.value = ''
+      $addressInput.value = ''
+      $previewWrapper.classList.add(CLASS_NAME.DISPLAY_NONE_CLASS)
+      $addressSearchBtn.classList.remove(CLASS_NAME.ACTIVE_CLASS)
+      $addressDetailInput.disabled = true
+      $addressDetailInput.value = ''
+    })
+
+    // 주소 api 호출
     const $addressSearchBtn = this.$addressForm.querySelector(
       '.address-search-btn'
     )
     $addressSearchBtn.addEventListener('click', async (e) => {
-      searchAddress(this.$addressForm)
+      if (this.$addressCheckInput.checked) searchAddress(this.$addressForm)
     })
   }
 
