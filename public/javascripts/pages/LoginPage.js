@@ -1,4 +1,4 @@
-import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
+import { TAG_NAME, CLASS_NAME, KEY_NAME } from '../utils/constants.js'
 import Button from '../components/common/Button.js'
 import api from '../apis/api.js'
 
@@ -11,6 +11,7 @@ const ERROR_CASES = {
     empty: '비밀번호를 입력해주세요.',
     lengthOver: '비밀번호는 100자를 넘을 수 없습니다.',
   },
+  common: '아이디와 비밀번호를 확인 후 다시 로그인해주세요.',
 }
 
 export default function LoginPage(props) {
@@ -22,6 +23,18 @@ export default function LoginPage(props) {
 
   this.init = () => {
     this.$loginForm = document.querySelector(loginFormSelector)
+    this.$inputs = Array.from(
+      this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
+    )
+
+    this.$inputs.forEach(($input) => {
+      $input.addEventListener('keyup', (event) => {
+        if (event.key === KEY_NAME.ENTER) {
+          this.sendLoginRequest()
+        }
+      })
+    })
+
     this.$errorNode = this.$loginForm.querySelector('.error-message')
 
     new Button({
@@ -30,13 +43,9 @@ export default function LoginPage(props) {
     })
   }
 
-  this.sendLoginRequest = () => {
-    const $inputs = Array.from(
-      this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
-    )
+  this.sendLoginRequest = async () => {
     const inputValues = {}
-
-    const errorMessages = $inputs.reduce((errorMessages, $input) => {
+    const errorMessages = this.$inputs.reduce((errorMessages, $input) => {
       inputValues[$input.name] = $input.value
 
       const result = validateInput($input.value)
@@ -52,8 +61,17 @@ export default function LoginPage(props) {
       return
     }
 
+    const response = await api.requestLogin(inputValues)
+    if (response.status === 404) {
+      this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
+      this.$errorNode.innerHTML = ERROR_CASES.common
+
+      this.$inputs.forEach(($input) => ($input.value = ''))
+      return
+    }
+
     this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
-    api.requestLogin(inputValues).then((data) => data.status)
+    window.location = '/'
   }
 
   this.init()
