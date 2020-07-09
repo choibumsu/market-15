@@ -14,7 +14,7 @@ const inputInfos = {
 
 // id validation
 async function validateIdDuplication(id) {
-  const result = await api.checkIdDuplication(id)
+  const { status } = await api.checkIdDuplication(id)
   if (status === 409) {
     return '이미 사용중인 아이디 입니다. 다른 아이디를 입력해 주세요.'
   }
