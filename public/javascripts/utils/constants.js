@@ -1,10 +1,13 @@
 export const TAG_NAME = {
   INPUT: 'INPUT',
   SELECT: 'SELECT',
+  BUTTON: 'BUTTON',
 }
 
 export const SELECT_VALUE = {
   SELF: 'self',
+  NAVER: 'naver.com',
+  GMAIL: 'gmail.com',
 }
 
 export const CLASS_NAME = {
@@ -12,6 +15,9 @@ export const CLASS_NAME = {
   SUCCESS_CLASS: 'success',
   ACTIVE_CLASS: 'active',
 
-  INPUT_WRAPPER: 'input-wrapper',
-  ERROR_MESSAGE: 'error-message',
+  INPUT_WRAPPER_CLASS: 'input-wrapper',
+  ERROR_MESSAGE_CLASS: 'error-message',
+
+  SELECT_EMAIL_CLASS: 'selectEmail',
+  DISPLAY_NONE_CLASS: 'dp-none',
 }

@@ -19,18 +19,15 @@ export default function Timer(props) {
   this.init = () => {
     this.initCount = 120 // 2분
     this.$target = document.querySelector(selector)
-    this.setCount()
   }
 
   this.setCount = () => {
     this.initCount = 121
-    if (this.countPerSeconds) {
-      this.deleteCount() // 기존의 Web API 삭제
-    }
-    this.countPerSeconds = setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.initCount === 0) {
-        // ... 모달 오픈
-        reutrn
+        alert('인증 시간이 초과되었습니다.')
+        this.deleteCount()
+        return
       }
       this.initCount -= 1
       this.$target.innerHTML = `${getMinute(this.initCount)}:${getSeconds(
@@ -40,7 +37,7 @@ export default function Timer(props) {
   }
 
   this.deleteCount = () => {
-    clearInterval(this.countPerSeconds)
+    clearInterval(this.interval)
   }
 
   this.init()

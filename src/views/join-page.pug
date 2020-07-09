@@ -23,9 +23,9 @@ main#signup-container
 
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.email-wrapper
-      input.email(type='text' name='emailPrefix' placeholder='이메일 앞자리*')
+      input.email(type='text' name='emailPrefix' data-type='$emailPrefixInput' placeholder='이메일 앞자리*')
       span.at @
-      input.email.no-change(disabled='' name='emailSuffix' type='text' placeholder='이메일 뒷자리*')
+      input.email.no-change(disabled='' name='emailSuffix' data-type='$emailSuffixInput' type='text' placeholder='이메일 뒷자리*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
       select.selectEmail
@@ -37,12 +37,12 @@ main#signup-container
       input(type='text' name='name' data-type='$nameInput' placeholder='이름*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper
-      input.short(type='tel' name='phone' placeholder='휴대폰*')
+      input.short(type='tel' name='phone' data-type='$phoneInput' placeholder='휴대폰*')
       button.input-button.phone-auth-btn 인증받기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper.dp-none
       .time-input-wrapper
-        input.short(type='tel' name='phoneAuth' placeholder='인증번호 6자리 입력')
+        input.short(type='tel' name='phoneAuth' data-type='$phoneAuthInput' placeholder='인증번호 6자리 입력')
         .time 02:00
       button.input-button.phone-auth-btn.active 확인
       .error-message 예시 에러 메세지입니다.

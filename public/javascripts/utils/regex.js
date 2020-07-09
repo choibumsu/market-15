@@ -17,21 +17,5 @@ export const checkHasNumber = (value) => !regEx.number.test(value)
 export const checkId = (value) => !regEx.id.test(value)
 export const checkPassword = (value) => !regEx.password.test(value)
 export const checkName = (value) => !regEx.name.test(value)
-
-// email
-export const isEmailEmpty = (value) =>
-  isEmpty(value) ? '이메일을 확인해주세요.' : undefined
-
-// phone
-export const isPhoneEmpty = (value) =>
-  isEmpty(value) ? '휴대전화번호를 입력해주세요.' : undefined
-
-export const checkPhone = (value) =>
-  !regEx.phone.test(value) ? '유효하지 않은 휴대전화번호입니다.' : undefined
-
-// phoneAuth
-export const isPhoneAuthEmpty = (value) =>
-  isEmpty(value) ? '인증번호를 입력해주세요.' : undefined
-
-export const checkPhoneAuth = (value) =>
-  !regEx.phoneAuth.test(value) ? '인증번호를 확인해주세요.' : undefined
+export const checkPhone = (value) => !regEx.phone.test(value)
+export const checkPhoneAuth = (value) => !regEx.phoneAuth.test(value)

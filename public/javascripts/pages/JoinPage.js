@@ -3,9 +3,15 @@ import {
   PasswordInput,
   PasswordConfirmInput,
   NameInput,
+  EmailPrefixInput,
+  EmailSuffixInput,
+  SelectEmail,
+  PhoneInput,
+  PhoneAuthInput,
   TermForm,
 } from '../components/join/index.js'
-import { TAG_NAME } from '../utils/constants.js'
+import { Timer } from '../components/common/index.js'
+import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
 
 function JoinPage({ sectionOneSelector }) {
   if (new.target !== JoinPage) {
@@ -17,6 +23,9 @@ function JoinPage({ sectionOneSelector }) {
       id: '',
       password: '',
       passwordConfirm: '',
+      emailPrefix: '',
+      emailSuffix: '',
+      phone: '',
     }
     this.$essentialForm = document.querySelector(sectionOneSelector)
     this.$idInput = new IdInput({
@@ -35,6 +44,30 @@ function JoinPage({ sectionOneSelector }) {
     this.$nameInput = new NameInput({
       selector: 'input[name=name]',
       updateFormValue: this.setState,
+    })
+    this.$emailPrefixInput = new EmailPrefixInput({
+      selector: `input[name=emailPrefix]`,
+      updateFormValue: this.setState,
+    })
+    this.$emailSuffixInput = new EmailSuffixInput({
+      selector: `input[name=emailSuffix]`,
+      updateFormValue: this.setState,
+    })
+    this.$selectEmail = new SelectEmail({
+      selector: `.${CLASS_NAME.SELECT_EMAIL_CLASS}`,
+      onChangeSelectTag: this.onChangeSelectTag,
+    })
+    this.$phoneInput = new PhoneInput({
+      selector: 'input[name=phone]',
+      updateFormValue: this.setState,
+      displayPhoneAuthInput: this.displayPhoneAuthInput,
+    })
+    this.timer = new Timer({ selector: '.time' })
+
+    this.$phoneAuthInput = new PhoneAuthInput({
+      selector: 'input[name=phoneAuth]',
+      updateFormValue: this.setState,
+      stopTimer: this.timer.deleteCount,
     })
 
     this.$termForm = new TermForm({
@@ -55,9 +88,25 @@ function JoinPage({ sectionOneSelector }) {
 
   this.setState = (key, value) => {
     this.formValue = { ...this.formValue, [key]: value }
+    console.log(this.formValue)
     if (key === 'password') {
       this.$passwordConfirmInput.setState(value)
     } // 비밀번호와 비밀번호 확인이 같은지 체크하기 위해 update
+  }
+
+  this.onChangeSelectTag = ({ target }) => {
+    this.$emailSuffixInput.setState(target.value)
+  }
+
+  this.displayPhoneAuthInput = () => {
+    alert(
+      '인증번호를 발송했습니다.\n 휴대폰 SMS 발송된 인증번호를 확인해 주세요.'
+    )
+    if (this.timer.interval) {
+      this.timer.deleteCount()
+    }
+    this.timer.setCount()
+    this.$phoneAuthInput.render()
   }
 
   this.init()
