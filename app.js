@@ -7,6 +7,7 @@ const LevelStore = require('level-session-store')(session)
 const bodyParser = require('body-parser')
 const app = express()
 const { SERVER_PORT } = require('./src/utils/constants')
+const { SECRET_KEYS } = require('./src/config/secrets')
 
 //pug
 app.set('view engine', 'pug')
@@ -19,7 +20,7 @@ app.use(bodyParser.json())
 //session
 app.use(
   session({
-    secret: 'keyboard cat',
+    secret: SECRET_KEYS.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
     store: new LevelStore(),

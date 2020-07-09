@@ -135,3 +135,6 @@ level-session-store
 
 #.DS_Store
 */.DS_Store
+
+# config
+src/config/secrets.js
