@@ -15,8 +15,10 @@ exports.postUserAuthController = async (req, res, next) => {
       return
     }
 
+    req.session.userId = id
     res.status(200).json({ name: user.name })
   } catch (e) {
+    console.log(e)
     next(e)
   }
 }
@@ -56,7 +58,7 @@ exports.postUserDuplicationController = async (req, res, next) => {
       res.status(409).json()
       return
     }
-    req.session.userId = id
+
     res.status(200).json()
   } catch (e) {
     next(e)
