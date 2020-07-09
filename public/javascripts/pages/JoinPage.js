@@ -56,7 +56,7 @@ function JoinPage(props) {
         'input[name=address]'
       )
       const $previewWrapper = this.$addressForm.querySelector(
-        '.preview-wrapper'
+        '.preview-wrapper햣'
       )
 
       $postalInput.value = ''
@@ -73,6 +73,19 @@ function JoinPage(props) {
     )
     $addressSearchBtn.addEventListener('click', async (e) => {
       if (this.$addressCheckInput.checked) searchAddress(this.$addressForm)
+    })
+
+    // 상세주소를 지번주소에 추가하기
+    const $addressDetailInput = this.$addressForm.querySelector(
+      'input[name=address-detail]'
+    )
+    console.log($addressDetailInput)
+    $addressDetailInput.addEventListener('input', (e) => {
+      console.log(e.target.value)
+      const $deatilAddressPreview = this.$addressForm.querySelector(
+        '.address-preview .detail'
+      )
+      $deatilAddressPreview.innerHTML = ' ' + e.target.value
     })
   }
 
@@ -93,13 +106,15 @@ const searchAddress = ($addressForm) => {
         'input[name=address-detail]'
       )
       const $previewWrapper = $addressForm.querySelector('.preview-wrapper')
-      const $addressPreview = $addressForm.querySelector('.address-preview')
+      const $preAddressPreview = $addressForm.querySelector(
+        '.address-preview .pre'
+      )
 
       $postalInput.value = postalCode
       $addressInput.value = address
       $addressDetailInput.value = ''
       $previewWrapper.classList.remove(CLASS_NAME.DISPLAY_NONE_CLASS)
-      $addressPreview.innerHTML = data.jibunAddress
+      $preAddressPreview.innerHTML = data.jibunAddress || data.autoJibunAddress
 
       console.log(data)
     },
