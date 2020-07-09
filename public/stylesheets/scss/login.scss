@@ -44,14 +44,10 @@ body {
       height: 50px;
       border: 1px solid $color-gray-300;
       padding: 12px 14px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
 
       &:disabled {
         background-color: inherit;
-      }
-
-      &:last-child {
-        margin-bottom: 8px;
       }
     }
 
