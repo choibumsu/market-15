@@ -1,5 +1,6 @@
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
 import Button from '../components/common/Button.js'
+import api from '../apis/api.js'
 
 const ERROR_CASES = {
   id: {
@@ -14,7 +15,7 @@ const ERROR_CASES = {
 
 export default function LoginPage(props) {
   if (new.target !== LoginPage) {
-    return new LoginPage()
+    return new LoginPage(props)
   }
 
   const { loginFormSelector } = props
@@ -33,22 +34,26 @@ export default function LoginPage(props) {
     const $inputs = Array.from(
       this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
     )
+    const inputValues = {}
 
-    const errorMessages = $inputs.reduce((errorList, $input) => {
+    const errorMessages = $inputs.reduce((errorMessages, $input) => {
+      inputValues[$input.name] = $input.value
+
       const result = validateInput($input.value)
-
       if (result.isError) {
-        errorList.push(ERROR_CASES[$input.name][result.code])
+        errorMessages.push(ERROR_CASES[$input.name][result.code])
       }
-      return errorList
+      return errorMessages
     }, [])
 
     if (errorMessages.length > 0) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
       this.$errorNode.innerHTML = errorMessages[0]
+      return
     }
 
-    //call login api
+    this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
+    api.requestLogin(inputValues).then((data) => data.status)
   }
 
   this.init()

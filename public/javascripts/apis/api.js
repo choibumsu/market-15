@@ -27,6 +27,9 @@ const api = (() => {
     requestJoin(args) {
       return request('/user', METHOD.POST(args))
     },
+    requestLogin({ id, password }) {
+      return request('user/auth', METHOD.POST({ id, password }))
+    },
   }
 })()
 
