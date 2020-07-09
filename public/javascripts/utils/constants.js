@@ -11,4 +11,7 @@ export const CLASS_NAME = {
   ERROR_CLASS: 'error',
   SUCCESS_CLASS: 'success',
   ACTIVE_CLASS: 'active',
+
+  INPUT_WRAPPER: 'input-wrapper',
+  ERROR_MESSAGE: 'error-message',
 }

@@ -1,15 +1,5 @@
 import api from '../apis/api.js'
 import {
-  isIdEmpty,
-  checkId,
-  checkHasEnglish,
-  checkHasNumber,
-  isPasswordEmpty,
-  checkPassword,
-  isPasswordConfirmEmpty,
-  isNameEmpty,
-  checkMinNameLength,
-  checkName,
   isEmailEmpty,
   isPhoneEmpty,
   checkPhone,
@@ -18,40 +8,10 @@ import {
 } from './regex.js'
 
 const checkMethods = {
-  id: [isIdEmpty, checkHasEnglish, checkId, validateIdDuplication],
-  password: [isPasswordEmpty, checkHasEnglish, checkHasNumber, checkPassword],
-  passwordConfirm: [
-    isPasswordConfirmEmpty,
-    checkHasEnglish,
-    checkHasNumber,
-    checkIsSameWithPassword,
-  ],
-  name: [isNameEmpty, checkMinNameLength, checkName],
   emailPrefix: [isEmailEmpty],
   emailSuffix: [isEmailEmpty],
   phone: [isPhoneEmpty, checkPhone],
   phoneAuth: [isPhoneAuthEmpty, checkPhoneAuth],
-}
-
-// id validation
-async function validateIdDuplication(id) {
-  const { status } = await api.checkIdDuplication(id)
-  if (status === 409) {
-    return '이미 사용중인 아이디 입니다. 다른 아이디를 입력해 주세요.'
-  }
-  return undefined
-}
-
-// pw
-function checkIsSameWithPassword(passwordConfirmValue) {
-  const $passwordInput = document.querySelector('input[name=password]')
-  if (!$passwordInput) {
-    return '비밀번호를 먼저 입력해주세요.'
-  }
-  if ($passwordInput.value !== passwordConfirmValue) {
-    return '비밀번호와 비밀번호 확인이 일치하지 않습니다.'
-  }
-  return undefined
 }
 
 // common
