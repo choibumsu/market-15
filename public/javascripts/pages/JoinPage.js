@@ -3,6 +3,7 @@ import {
   PasswordInput,
   PasswordConfirmInput,
   NameInput,
+  TermForm,
 } from '../components/join/index.js'
 import { TAG_NAME } from '../utils/constants.js'
 
@@ -34,6 +35,10 @@ function JoinPage({ sectionOneSelector }) {
     this.$nameInput = new NameInput({
       selector: 'input[name=name]',
       updateFormValue: this.setState,
+    })
+
+    this.$termForm = new TermForm({
+      selector: '.term-form',
     })
 
     this.bindEvent()

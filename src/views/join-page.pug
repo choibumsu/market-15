@@ -70,18 +70,18 @@ main#signup-container
   section.term-form
     .term-wrapper.all-term
       .checkbox-wrapper
-        input#all(type='checkbox')
+        input#all(type='checkbox' name='all')
         label.term-title.strong(for='all') 전체 약관에 동의합니다
     .term-wrapper.essential-term
       .checkbox-wrapper
-        input#essentail(type='checkbox')
+        input#essentail(type='checkbox' name='essential')
         label.term-title(for='essentail') 필수 약관에 동의합니다.
       .sub-wrapper.term-wrapper
         .term-link 배민사장님장 이용약관
         .term-link 개인정보 수집이용 동의
     .term-wrapper.optional-term
       .checkbox-wrapper
-        input#optional(type='checkbox')
+        input#optional(type='checkbox' name='optional')
         label.term-title(for='optional') 광고성 정보 수신 동의 (선택)
       p.sub-wrapper.description
         | 배민사장님광장 회원에게 제공하는 서비스의 광고성 정보를 수신합니다.
