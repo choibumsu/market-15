@@ -37,12 +37,12 @@ main#signup-container
       input(type='text' name='name' data-type='$nameInput' placeholder='이름*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper
-      input.short(type='tel' name='phone' placeholder='휴대폰*')
+      input.short(type='tel' name='phone' data-type='$phoneInput' placeholder='휴대폰*')
       button.input-button.phone-auth-btn 인증받기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper.dp-none
       .time-input-wrapper
-        input.short(type='tel' name='phoneAuth' placeholder='인증번호 6자리 입력')
+        input.short(type='tel' name='phoneAuth' data-type='$phoneAuthInput' placeholder='인증번호 6자리 입력')
         .time 02:00
       button.input-button.phone-auth-btn.active 확인
       .error-message 예시 에러 메세지입니다.

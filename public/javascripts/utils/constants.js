@@ -1,6 +1,7 @@
 export const TAG_NAME = {
   INPUT: 'INPUT',
   SELECT: 'SELECT',
+  BUTTON: 'BUTTON',
 }
 
 export const SELECT_VALUE = {
@@ -18,4 +19,5 @@ export const CLASS_NAME = {
   ERROR_MESSAGE_CLASS: 'error-message',
 
   SELECT_EMAIL_CLASS: 'selectEmail',
+  DISPLAY_NONE_CLASS: 'dp-none',
 }

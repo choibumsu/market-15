@@ -6,7 +6,10 @@ import {
   EmailPrefixInput,
   EmailSuffixInput,
   SelectEmail,
+  PhoneInput,
+  PhoneAuthInput,
 } from '../components/join/index.js'
+import { Timer } from '../components/common/index.js'
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
 
 function JoinPage({ sectionOneSelector }) {
@@ -21,6 +24,7 @@ function JoinPage({ sectionOneSelector }) {
       passwordConfirm: '',
       emailPrefix: '',
       emailSuffix: '',
+      phone: '',
     }
     this.$essentialForm = document.querySelector(sectionOneSelector)
     this.$idInput = new IdInput({
@@ -52,6 +56,18 @@ function JoinPage({ sectionOneSelector }) {
       selector: `.${CLASS_NAME.SELECT_EMAIL_CLASS}`,
       onChangeSelectTag: this.onChangeSelectTag,
     })
+    this.$phoneInput = new PhoneInput({
+      selector: 'input[name=phone]',
+      updateFormValue: this.setState,
+      displayPhoneAuthInput: this.displayPhoneAuthInput,
+    })
+    this.timer = new Timer({ selector: '.time' })
+
+    this.$phoneAuthInput = new PhoneAuthInput({
+      selector: 'input[name=phoneAuth]',
+      updateFormValue: this.setState,
+      stopTimer: this.timer.deleteCount,
+    })
 
     this.bindEvent()
   }
@@ -75,6 +91,17 @@ function JoinPage({ sectionOneSelector }) {
 
   this.onChangeSelectTag = ({ target }) => {
     this.$emailSuffixInput.setState(target.value)
+  }
+
+  this.displayPhoneAuthInput = () => {
+    alert(
+      '인증번호를 발송했습니다.\n 휴대폰 SMS 발송된 인증번호를 확인해 주세요.'
+    )
+    if (this.timer.interval) {
+      this.timer.deleteCount()
+    }
+    this.timer.setCount()
+    this.$phoneAuthInput.render()
   }
 
   this.init()
