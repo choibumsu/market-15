@@ -42,16 +42,12 @@ exports.postUserDuplicationController = async (req, res, next) => {
   try {
     const { id } = req.body
     const user = await getUserOne(id)
-
     if (user) {
       res.status(409).json()
       return
     }
-
     res.status(200).json()
   } catch (e) {
-    // next(e)
-    console.log(e)
-    res.status(404).json()
+    next(e)
   }
 }

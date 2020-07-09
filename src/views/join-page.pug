@@ -11,19 +11,19 @@ main#signup-container
       img.logo(src='/static/images/logo.png' alt='logo')
     .title 필수 정보를 입력해주세요.
     .input-wrapper
-      input(type='text' placeholder='아이디* (4~20자)')
+      input(type='text' name='id' placeholder='아이디* (4~20자)')
       .error-message 예시 에러 메세지입니다.
       .allow-message 입력하신 아이디로 사용이 가능합니다.
     .input-wrapper
-      input(type='text' placeholder='비밀번호* (영문+숫자, 8~20자)')
+      input(type='password' name='password' placeholder='비밀번호* (영문+숫자, 8~20자)')
       .error-message 예시 에러 메세지입니다.
-    .input-wrapper.error
-      input(type='text' placeholder='비밀번호 확인')
+    .input-wrapper
+      input(type='password' name='passwordConfirm' placeholder='비밀번호 확인')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.email-wrapper
-      input.email(type='text' placeholder='이메일 앞자리*')
+      input.email(type='text' name='emailPrefix' placeholder='이메일 앞자리*')
       span.at @
-      input.email(disabled='' type='text' placeholder='이메일 뒷자리*')
+      input.email(disabled='' name='emailSuffix' type='text' placeholder='이메일 뒷자리*')
     .input-wrapper
       select
         option(disabled='' selected='' value='') 이메일 선택
@@ -31,10 +31,10 @@ main#signup-container
         option(value='') gmail.com
         option(value='') 직접입력
     .input-wrapper
-      input(type='text' placeholder='이름*')
+      input(type='text' name='name' placeholder='이름*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper
-      input.short(type='text' placeholder='휴대폰*')
+      input.short(type='text' name='phone' placeholder='휴대폰*')
       button.input-button.phone-auth-btn 인증받기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper.dp-none
@@ -87,3 +87,5 @@ main#signup-container
       .term-link 내용보기
   section.button-row
     .woowa-btn 가입완료
+script(type='module' src='/static/javascripts/pages/JoinPage.js')
+
