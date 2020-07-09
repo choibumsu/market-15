@@ -5,7 +5,7 @@ import { getSubNodes } from '../../utils/functions.js'
 
 export default function IdInput({ selector, updateFormValue }) {
   if (new.target !== IdInput) {
-    return new IdInput({ selector })
+    return new IdInput({ selector, updateFormValue })
   }
 
   this.init = () => {

@@ -23,9 +23,9 @@ main#signup-container
 
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.email-wrapper
-      input.email(type='text' name='emailPrefix' placeholder='이메일 앞자리*')
+      input.email(type='text' name='emailPrefix' data-type='$emailPrefixInput' placeholder='이메일 앞자리*')
       span.at @
-      input.email.no-change(disabled='' name='emailSuffix' type='text' placeholder='이메일 뒷자리*')
+      input.email.no-change(disabled='' name='emailSuffix' data-type='$emailSuffixInput' type='text' placeholder='이메일 뒷자리*')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
       select.selectEmail

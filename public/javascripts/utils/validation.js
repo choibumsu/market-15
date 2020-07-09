@@ -1,4 +1,3 @@
-import api from '../apis/api.js'
 import {
   isEmailEmpty,
   isPhoneEmpty,
@@ -8,7 +7,6 @@ import {
 } from './regex.js'
 
 const checkMethods = {
-  emailPrefix: [isEmailEmpty],
   emailSuffix: [isEmailEmpty],
   phone: [isPhoneEmpty, checkPhone],
   phoneAuth: [isPhoneAuthEmpty, checkPhoneAuth],
