@@ -5,10 +5,17 @@ function JoinPage(props) {
   if (new.target !== JoinPage) {
     return new JoinPage(props)
   }
-  const { essentialFormSelector } = props
+  const { essentialFormSelector, termFormSelector } = props
 
   this.init = () => {
     this.$essentialForm = document.querySelector(essentialFormSelector)
+
+    this.$termForm = document.querySelector(termFormSelector)
+    this.$terms = {
+      all: this.$termForm.querySelector('input[name=all]'),
+      essential: this.$termForm.querySelector('input[name=essential]'),
+      optional: this.$termForm.querySelector('input[name=optional]'),
+    }
     this.bindEvent()
   }
 
@@ -32,6 +39,27 @@ function JoinPage(props) {
         $inputWrapper.classList.add(CLASS_NAME.SUCCESS_CLASS)
       } // id input만 success message
     })
+
+    this.$termForm.addEventListener('change', async (e) => {
+      if (e.target.tagName !== TAG_NAME.INPUT) {
+        return
+      }
+
+      const { name } = e.target
+      const termKeys = Object.keys(this.$terms)
+
+      if (name === 'all') {
+        termKeys.forEach(
+          (key) => (this.$terms[key].checked = this.$terms.all.checked)
+        )
+      }
+
+      this.$terms.all.checked = termKeys.reduce((isAllChekced, key) => {
+        if (key !== 'all')
+          isAllChekced = isAllChekced && this.$terms[key].checked
+        return isAllChekced
+      })
+    })
   }
 
   this.init()
@@ -40,6 +68,7 @@ function JoinPage(props) {
 try {
   new JoinPage({
     essentialFormSelector: '.essential-form',
+    termFormSelector: '.term-form',
   })
 } catch (e) {
   console.error(e)
