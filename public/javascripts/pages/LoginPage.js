@@ -24,6 +24,18 @@ export default function LoginPage(props) {
 
   this.init = () => {
     this.$loginForm = document.querySelector(loginFormSelector)
+    this.$inputs = Array.from(
+      this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
+    )
+
+    this.$inputs.forEach(($input) => {
+      $input.addEventListener('keyup', (event) => {
+        if (event.key === KEY_NAME.ENTER) {
+          this.sendLoginRequest()
+        }
+      })
+    })
+
     this.$errorNode = this.$loginForm.querySelector('.error-message')
 
     const $idInput = this.$loginForm.querySelector('input[name=id]')
