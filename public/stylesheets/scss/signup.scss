@@ -95,14 +95,13 @@ body {
     }
 
     &.success {
-      margin-bottom: 38px;
+      margin-bottom: 18px;
 
       .allow-message {
         display: block;
         color: $color-gray-600;
         font-size: 14px;
-        position: absolute;
-        bottom: -22px;
+        margin-top: 6px;
       }
     }
 
