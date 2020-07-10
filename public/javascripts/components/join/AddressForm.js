@@ -18,7 +18,7 @@ export default function AddressForm({ selector, updateFormValue }) {
 
     this.$previewWrapper = this.$target.querySelector('.preview-wrapper')
     this.$prePreview = this.$previewWrapper.querySelector('.pre')
-    this.$deatilPreview = this.$previewWrapper.querySelector('.detail')
+    this.$detailPreview = this.$previewWrapper.querySelector('.detail')
 
     this.bindEvent()
   }
@@ -64,7 +64,7 @@ export default function AddressForm({ selector, updateFormValue }) {
     }
 
     const onChangeDetailInputHandler = (e) => {
-      this.$deatilPreview.innerHTML = ' ' + e.target.value
+      this.$detailPreview.innerHTML = ' ' + e.target.value
       updateFormValue(e.target.dataset.type, e.target.value)
     }
 
