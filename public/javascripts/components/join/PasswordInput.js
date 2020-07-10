@@ -21,11 +21,6 @@ export default function PasswordInput({ selector, updateFormValue }) {
     this.bindEvent()
   }
 
-  this.renderErrorNode = () => {
-    this.$inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
-    this.$errorNode.innerHTML = this.errorMessage
-  }
-
   this.validate = () => {
     const { value } = this.$target
 

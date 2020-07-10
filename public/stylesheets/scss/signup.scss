@@ -12,6 +12,51 @@ body {
   margin: 100px 0;
   background-color: $color-white;
 
+  .gray-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background: rgba(100, 100, 100, 0.5);
+  }
+
+  .gray-bg > .modal-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .gray-bg > .modal-wrapper .modal-box {
+    background: white;
+    padding: 25px 22px;
+    box-shadow: 10px 10px 10px rgba(100, 100, 100, 0.7);
+    min-width: 100px;
+  }
+
+  .gray-bg > .modal-wrapper .modal-box > h2 {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .gray-bg > .modal-wrapper .modal-box > .content {
+    font-size: 15px;
+  }
+
+  .gray-bg > .modal-wrapper .close {
+    background: white;
+    padding: 25px 22px;
+    box-shadow: 10px 10px 10px rgba(100, 100, 100, 0.7);
+    min-width: 100px;
+    text-align: center;
+    border-top: 1px solid black;
+    cursor: pointer;
+  }
+
   input[type='checkbox'] {
     width: 25px;
     height: 25px;

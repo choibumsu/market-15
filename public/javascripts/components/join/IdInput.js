@@ -17,11 +17,6 @@ export default function IdInput({ selector, updateFormValue }) {
     this.bindEvent()
   }
 
-  this.renderErrorNode = () => {
-    this.$inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
-    this.$errorNode.innerHTML = this.errorMessage
-  }
-
   this.renderSuccessNode = () => {
     this.$inputWrapper.classList.add(CLASS_NAME.SUCCESS_CLASS)
   } // id input은 success div가 있음

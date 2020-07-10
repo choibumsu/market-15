@@ -11,9 +11,14 @@ import {
   AddressForm,
   TermForm,
 } from '../components/join/index.js'
-import { Timer, Button } from '../components/common/index.js'
+import { Timer, Button, Modal } from '../components/common/index.js'
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
 import api from '../apis/api.js'
+
+Object.prototype.renderErrorNode = function () {
+  this.$inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
+  this.$errorNode.innerHTML = this.errorMessage
+}
 
 function JoinPage(props) {
   if (new.target !== JoinPage) {
@@ -120,9 +125,8 @@ function JoinPage(props) {
     this.verrifyPhoneInput = true
   }
   this.displayPhoneAuthInput = () => {
-    alert(
-      '인증번호를 발송했습니다.\n 휴대폰 SMS 발송된 인증번호를 확인해 주세요.'
-    )
+    this.$modal = new Modal()
+    this.$modal.setVisible('block')
     if (this.timer.interval) {
       this.timer.deleteCount()
     }
