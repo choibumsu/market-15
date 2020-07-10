@@ -8,8 +8,11 @@ body {
 }
 
 #login-container {
-  width: 330px;
-  padding-bottom: 40px;
+  width: 392px;
+  background-color: $color-white;
+  padding: 30px;
+  border: 1px solid $color-gray-700;
+  margin-bottom: 40px;
 
   .logo-wrapper {
     display: flex;
