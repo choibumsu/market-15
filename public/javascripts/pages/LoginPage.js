@@ -45,6 +45,12 @@ export default function LoginPage(props) {
       $input.addEventListener('keyup', onSendLoginRequestHandler)
     })
 
+    const savedId = localStorage.getItem('id')
+    if (savedId) {
+      $idInput.value = savedId
+      this.$saveIdCheckBox.checked = true
+    }
+
     new Button({
       selector: '.woowa-btn',
       onClickHandler: (e) => onSendLoginRequestHandler(e),
