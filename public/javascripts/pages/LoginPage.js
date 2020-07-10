@@ -24,6 +24,7 @@ export default function LoginPage(props) {
 
   this.init = () => {
     this.$loginForm = document.querySelector(loginFormSelector)
+    this.$saveIdCheckBox = this.$loginForm.querySelector('#is-save-id')
     this.$errorNode = this.$loginForm.querySelector('.error-message')
 
     const $idInput = this.$loginForm.querySelector('input[name=id]')
@@ -83,8 +84,15 @@ export default function LoginPage(props) {
 
     if (response.status === 200) {
       this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
-      const data = await response.json()
-      // window.location = `https://ceo.baemin.com/`
+      window.location = `https://ceo.baemin.com/`
+
+      if (this.$saveIdCheckBox.checked) {
+        const data = await response.json()
+        localStorage.setItem('id', data.id)
+        return
+      }
+
+      localStorage.removeItem('id')
       return
     } else if (response.status === 404) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
