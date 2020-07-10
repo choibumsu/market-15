@@ -6,18 +6,18 @@ export default function TermForm({ selector }) {
   }
 
   this.init = () => {
-    this.$termForm = document.querySelector(selector)
+    this.$target = document.querySelector(selector)
     this.$terms = {
-      all: this.$termForm.querySelector('input[name=all]'),
-      essential: this.$termForm.querySelector('input[name=essential]'),
-      optional: this.$termForm.querySelector('input[name=optional]'),
+      all: this.$target.querySelector('input[name=all]'),
+      essential: this.$target.querySelector('input[name=essential]'),
+      optional: this.$target.querySelector('input[name=optional]'),
     }
 
     this.bindEvent()
   }
 
   this.bindEvent = () => {
-    this.$termForm.addEventListener('change', async (e) => {
+    const onTermHandler = (e) => {
       if (e.target.tagName !== TAG_NAME.INPUT) {
         return
       }
@@ -36,7 +36,9 @@ export default function TermForm({ selector }) {
           isAllChekced = isAllChekced && this.$terms[key].checked
         return isAllChekced
       })
-    })
+    }
+
+    this.$target.addEventListener('change', onTermHandler)
   }
 
   this.init()

@@ -6,18 +6,17 @@ export default function AddressForm({ selector }) {
   }
 
   this.init = () => {
-    this.$addressForm = document.querySelector(selector)
-    this.$addressCheckInput = this.$addressForm.querySelector('#address-check')
-    this.$addressSearchBtn = this.$addressForm.querySelector(
-      '.address-search-btn'
-    )
-    this.$postalInput = this.$addressForm.querySelector('input[name=postal]')
-    this.$addressInput = this.$addressForm.querySelector('input[name=address]')
-    this.$addressDetailInput = this.$addressForm.querySelector(
+    this.$target = document.querySelector(selector)
+    this.$addressCheckInput = this.$target.querySelector('#address-check')
+    this.$addressSearchBtn = this.$target.querySelector('.address-search-btn')
+
+    this.$postalInput = this.$target.querySelector('input[name=postal]')
+    this.$addressInput = this.$target.querySelector('input[name=address]')
+    this.$addressDetailInput = this.$target.querySelector(
       'input[name=address-detail]'
     )
 
-    this.$previewWrapper = this.$addressForm.querySelector('.preview-wrapper')
+    this.$previewWrapper = this.$target.querySelector('.preview-wrapper')
     this.$prePreview = this.$previewWrapper.querySelector('.pre')
     this.$deatilPreview = this.$previewWrapper.querySelector('.detail')
 
@@ -26,22 +25,22 @@ export default function AddressForm({ selector }) {
 
   this.bindEvent = () => {
     // 선택 정보 입력 활성화 이벤트 등록
-    this.$addressCheckInput.addEventListener('change', (e) => {
-      this.changeAddressCheckbox(e)
-    })
+    this.$addressCheckInput.addEventListener(
+      'change',
+      this.changeCheckboxHandler
+    )
 
     // 주소 api 호출
-    this.$addressSearchBtn.addEventListener('click', () => {
-      if (this.$addressCheckInput.checked) this.searchAddress()
-    })
+    this.$addressSearchBtn.addEventListener(
+      'click',
+      this.onClickAddressSearchHandler
+    )
 
     // 상세주소를 지번주소에 추가하기
-    this.$addressDetailInput.addEventListener('input', (e) => {
-      this.$deatilPreview.innerHTML = ' ' + e.target.value
-    })
+    this.$addressDetailInput.addEventListener('input', this.onChangeDetailInput)
   }
 
-  this.changeAddressCheckbox = (e) => {
+  this.changeCheckboxHandler = (e) => {
     if (e.target.checked) {
       this.$addressSearchBtn.classList.add(CLASS_NAME.ACTIVE_CLASS)
       this.$addressDetailInput.disabled = false
@@ -56,7 +55,9 @@ export default function AddressForm({ selector }) {
     this.$addressDetailInput.value = ''
   }
 
-  this.searchAddress = () => {
+  this.onClickAddressSearchHandler = () => {
+    if (this.$addressCheckInput.checked) return
+
     new daum.Postcode({
       this: this,
       oncomplete: (data) => {
@@ -72,6 +73,10 @@ export default function AddressForm({ selector }) {
         this.$prePreview.innerHTML = jibunAddress
       },
     }).open()
+  }
+
+  this.onChangeDetailInput = () => {
+    this.$deatilPreview.innerHTML = ' ' + e.target.value
   }
 
   this.init()

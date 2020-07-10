@@ -71,10 +71,10 @@ function JoinPage({ sectionOneSelector }) {
       stopTimer: this.timer.deleteCount,
     })
     this.$addressForm = new AddressForm({
-      selector: '.address-form',
+      selector: `.${CLASS_NAME.ADDRESS_FORM_CLASS}`,
     })
     this.$termForm = new TermForm({
-      selector: '.term-form',
+      selector: `.${CLASS_NAME.TERM_FORM_CLASS}`,
     })
 
     this.bindEvent()
