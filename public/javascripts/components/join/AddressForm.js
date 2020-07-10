@@ -56,6 +56,7 @@ export default function AddressForm({ selector, updateFormValue }) {
           this.$addressDetailInput.value = ''
           this.$previewWrapper.classList.remove(CLASS_NAME.DISPLAY_NONE_CLASS)
           this.$prePreview.innerHTML = jibunAddress
+          this.$detailPreview.innerHTML = ''
           updateFormValue('postalCode', postalCode)
           updateFormValue('address', address)
         },
