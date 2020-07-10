@@ -35,6 +35,8 @@ function JoinPage(props) {
       isEssentialTerm: false,
       isOptionalTerm: false,
     }
+    this.verrifyPhoneInput = false // 인풋 인증했는지 check
+
     this.$essentialForm = document.querySelector(sectionOneSelector)
     this.$idInput = new IdInput({
       selector: 'input[name=id]',
@@ -76,6 +78,7 @@ function JoinPage(props) {
       selector: 'input[name=phoneAuth]',
       updateFormValue: this.setState,
       stopTimer: this.timer.deleteCount,
+      disablePhoneInput: this.disablePhoneInput,
     })
     this.$addressForm = new AddressForm({
       selector: `.${CLASS_NAME.ADDRESS_FORM_CLASS}`,
@@ -112,7 +115,10 @@ function JoinPage(props) {
   this.onChangeSelectTag = ({ target }) => {
     this.$emailSuffixInput.setState(target.value)
   }
-
+  this.disablePhoneInput = () => {
+    this.$phoneInput.disable()
+    this.verrifyPhoneInput = true
+  }
   this.displayPhoneAuthInput = () => {
     alert(
       '인증번호를 발송했습니다.\n 휴대폰 SMS 발송된 인증번호를 확인해 주세요.'
@@ -125,7 +131,6 @@ function JoinPage(props) {
   }
 
   this.handleSubmit = async () => {
-    const { isEssentialTerm } = this.formValue
     const components = [
       '$idInput',
       '$passwordInput',
@@ -146,6 +151,10 @@ function JoinPage(props) {
       console.log('hasError', hasError)
       return
     }
+    if (!this.verrifyPhoneInput) {
+      this.$phoneInput.renderNeedCertificationComplete()
+      return
+    } // 휴대폰 인증x
     if (!this.formValue.isEssentialTerm) {
       return alert('필수 약관을 동의해주세요.')
     }

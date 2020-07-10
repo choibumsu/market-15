@@ -71,5 +71,16 @@ export default function PhoneInput(props) {
     this.$phoneButton.addEventListener('click', onClickHandler)
   }
 
+  this.renderNeedCertificationComplete = () => {
+    this.errorMessage = '휴대폰 인증이 필요합니다.'
+    this.renderErrorNode()
+  }
+
+  this.disable = () => {
+    this.$target.disabled = true
+    this.$inputWrapper.classList.remove(CLASS_NAME.ERROR_CLASS)
+    this.$phoneButton.classList.remove(CLASS_NAME.ACTIVE_CLASS)
+  }
+
   this.init()
 }
