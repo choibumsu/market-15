@@ -27,33 +27,30 @@ export default function LoginPage(props) {
     this.$saveIdCheckBox = this.$loginForm.querySelector('#is-save-id')
     this.$errorNode = this.$loginForm.querySelector('.error-message')
 
-    const $idInput = this.$loginForm.querySelector('input[name=id]')
-    const $passwordInput = $idInput.nextElementSibling
-    this.$inputs = [$idInput, $passwordInput]
-
-    this.$inputs.forEach(($input) => {
-      $input.addEventListener('keyup', onSendLoginRequestHandler)
-    })
-
-    this.$errorNode = this.$loginForm.querySelector('.error-message')
-
-    const $idInput = this.$loginForm.querySelector('input[name=id]')
-    const $passwordInput = $idInput.nextElementSibling
-    this.$inputs = [$idInput, $passwordInput]
-
-    this.$inputs.forEach(($input) => {
-      $input.addEventListener('keyup', onSendLoginRequestHandler)
-    })
-
-    const savedId = localStorage.getItem('id')
-    if (savedId) {
-      $idInput.value = savedId
-      this.$saveIdCheckBox.checked = true
-    }
+    this.$idInput = this.$loginForm.querySelector('input[name=id]')
+    this.$passwordInput = this.$idInput.nextElementSibling
+    this.$inputs = [this.$idInput, this.$passwordInput]
 
     new Button({
       selector: '.woowa-btn',
       onClickHandler: (e) => onSendLoginRequestHandler(e),
+    })
+
+    this.bindEvent()
+    this.setId()
+  }
+
+  this.setId = () => {
+    const savedId = localStorage.getItem('id')
+    if (savedId) {
+      this.$idInput.value = savedId
+      this.$saveIdCheckBox.checked = true
+    }
+  }
+
+  this.bindEvent = () => {
+    this.$inputs.forEach(($input) => {
+      $input.addEventListener('keyup', onSendLoginRequestHandler)
     })
   }
 
@@ -82,11 +79,10 @@ export default function LoginPage(props) {
 
     if (checkError()) return
 
-    const inputValues = this.$inputs.reduce((inputValues, $input) => {
-      inputValues[$input.name] = $input.value
-      return inputValues
-    }, {})
-    const response = await api.requestLogin(inputValues)
+    const response = await api.requestLogin(
+      this.$idInput.value,
+      this.$passwordInput.value
+    )
 
     if (response.status === 200) {
       this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
@@ -97,8 +93,8 @@ export default function LoginPage(props) {
         localStorage.setItem('id', data.id)
         return
       }
-
       localStorage.removeItem('id')
+
       return
     } else if (response.status === 404) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
@@ -106,8 +102,9 @@ export default function LoginPage(props) {
 
       this.$inputs.forEach(($input) => {
         $input.value = ''
-        if ($input.name === 'id') $input.focus()
       })
+      this.$idInput.focus()
+
       return
     }
 
