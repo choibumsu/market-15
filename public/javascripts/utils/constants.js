@@ -19,4 +19,6 @@ export const CLASS_NAME = {
 
   SELECT_EMAIL_CLASS: 'selectEmail',
   DISPLAY_NONE_CLASS: 'dp-none',
+  TERM_FORM_CLASS: 'term-form',
+  ADDRESS_FORM_CLASS: 'address-form',
 }

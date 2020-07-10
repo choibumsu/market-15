@@ -8,6 +8,8 @@ import {
   SelectEmail,
   PhoneInput,
   PhoneAuthInput,
+  AddressForm,
+  TermForm,
 } from '../components/join/index.js'
 import { Timer } from '../components/common/index.js'
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
@@ -17,7 +19,7 @@ function JoinPage(props) {
     return new JoinPage(props)
   }
 
-  const { sectionOneSelector, addressFormSelector, termFormSelector } = props
+  const { sectionOneSelector } = props
 
   this.init = () => {
     this.formValue = {
@@ -70,15 +72,13 @@ function JoinPage(props) {
       updateFormValue: this.setState,
       stopTimer: this.timer.deleteCount,
     })
-    this.$addressForm = document.querySelector(addressFormSelector)
-    this.$addressCheckInput = this.$addressForm.querySelector('#address-check')
-    this.$termForm = document.querySelector(termFormSelector)
-    this.$terms = {
-      all: this.$termForm.querySelector('input[name=all]'),
-      essential: this.$termForm.querySelector('input[name=essential]'),
-      optional: this.$termForm.querySelector('input[name=optional]'),
-    }
-   
+    this.$addressForm = new AddressForm({
+      selector: `.${CLASS_NAME.ADDRESS_FORM_CLASS}`,
+    })
+    this.$termForm = new TermForm({
+      selector: `.${CLASS_NAME.TERM_FORM_CLASS}`,
+    })
+
     this.bindEvent()
   }
 
@@ -88,80 +88,6 @@ function JoinPage(props) {
         return
       }
       this[e.target.dataset.type].validate()
-    })
-
-    this.$termForm.addEventListener('change', async (e) => {
-      if (e.target.tagName !== TAG_NAME.INPUT) {
-        return
-      }
-
-      const { name } = e.target
-      const termKeys = Object.keys(this.$terms)
-
-      if (name === 'all') {
-        termKeys.forEach(
-          (key) => (this.$terms[key].checked = this.$terms.all.checked)
-        )
-      }
-
-      this.$terms.all.checked = termKeys.reduce((isAllChekced, key) => {
-        if (key !== 'all')
-          isAllChekced = isAllChekced && this.$terms[key].checked
-        return isAllChekced
-      })
-    })
-
-    // 선택 정보 입력 활성화 이벤트 등록
-    this.$addressCheckInput.addEventListener('change', (e) => {
-      const isChecked = e.target.checked
-      const $addressSearchBtn = this.$addressForm.querySelector(
-        '.address-search-btn'
-      )
-      const $addressDetailInput = this.$addressForm.querySelector(
-        'input[name=address-detail]'
-      )
-
-      if (isChecked) {
-        $addressSearchBtn.classList.add(CLASS_NAME.ACTIVE_CLASS)
-        $addressDetailInput.disabled = false
-        return
-      }
-
-      const $postalInput = this.$addressForm.querySelector('input[name=postal]')
-      const $addressInput = this.$addressForm.querySelector(
-        'input[name=address]'
-      )
-      const $previewWrapper = this.$addressForm.querySelector(
-        '.preview-wrapper햣'
-      )
-
-      $postalInput.value = ''
-      $addressInput.value = ''
-      $previewWrapper.classList.add(CLASS_NAME.DISPLAY_NONE_CLASS)
-      $addressSearchBtn.classList.remove(CLASS_NAME.ACTIVE_CLASS)
-      $addressDetailInput.disabled = true
-      $addressDetailInput.value = ''
-    })
-
-    // 주소 api 호출
-    const $addressSearchBtn = this.$addressForm.querySelector(
-      '.address-search-btn'
-    )
-    $addressSearchBtn.addEventListener('click', async (e) => {
-      if (this.$addressCheckInput.checked) searchAddress(this.$addressForm)
-    })
-
-    // 상세주소를 지번주소에 추가하기
-    const $addressDetailInput = this.$addressForm.querySelector(
-      'input[name=address-detail]'
-    )
-    console.log($addressDetailInput)
-    $addressDetailInput.addEventListener('input', (e) => {
-      console.log(e.target.value)
-      const $deatilAddressPreview = this.$addressForm.querySelector(
-        '.address-preview .detail'
-      )
-      $deatilAddressPreview.innerHTML = ' ' + e.target.value
     })
   }
 
@@ -191,40 +117,11 @@ function JoinPage(props) {
   this.init()
 }
 
-const searchAddress = ($addressForm) => {
-  new daum.Postcode({
-    component: '',
-    oncomplete: (data) => {
-      const postalCode = data.zonecode
-      const address =
-        data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress
 
-      const $postalInput = $addressForm.querySelector('input[name=postal]')
-      const $addressInput = $addressForm.querySelector('input[name=address]')
-      const $addressDetailInput = $addressForm.querySelector(
-        'input[name=address-detail]'
-      )
-      const $previewWrapper = $addressForm.querySelector('.preview-wrapper')
-      const $preAddressPreview = $addressForm.querySelector(
-        '.address-preview .pre'
-      )
-
-      $postalInput.value = postalCode
-      $addressInput.value = address
-      $addressDetailInput.value = ''
-      $previewWrapper.classList.remove(CLASS_NAME.DISPLAY_NONE_CLASS)
-      $preAddressPreview.innerHTML = data.jibunAddress || data.autoJibunAddress
-
-      console.log(data)
-    },
-  }).open()
-}
 
 try {
   new JoinPage({ 
     sectionOneSelector: '.essential-form', 
-    termFormSelector: '.term-form', 
-    addressFormSelector: '.address-form',
   })
 } catch (e) {
   console.error(e)
