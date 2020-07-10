@@ -50,15 +50,8 @@ export default function LoginPage(props) {
     })
   }
 
-  const onSendLoginRequestHandler = async (e) => {
-    if (e.type === 'keyup' && e.key !== KEY_NAME.ENTER) {
-      return
-    }
-
-    const inputValues = {}
+  const checkError = () => {
     const errorMessages = this.$inputs.reduce((errorMessages, $input) => {
-      inputValues[$input.name] = $input.value
-
       const result = validateInput($input.value)
       if (result.isError) {
         errorMessages.push(ERROR_CASES[$input.name][result.code])
@@ -69,13 +62,29 @@ export default function LoginPage(props) {
     if (errorMessages.length > 0) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
       this.$errorNode.innerHTML = errorMessages[0]
+      return true
+    }
+
+    return false
+  }
+
+  const onSendLoginRequestHandler = async (e) => {
+    if (e.type === 'keyup' && e.key !== KEY_NAME.ENTER) {
       return
     }
 
+    if (checkError()) return
+
+    const inputValues = this.$inputs.reduce((inputValues, $input) => {
+      inputValues[$input.name] = $input.value
+      return inputValues
+    }, {})
     const response = await api.requestLogin(inputValues)
+
     if (response.status === 200) {
       this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
-      window.location = `https://ceo.baemin.com/`
+      const data = await response.json()
+      // window.location = `https://ceo.baemin.com/`
       return
     } else if (response.status === 404) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
