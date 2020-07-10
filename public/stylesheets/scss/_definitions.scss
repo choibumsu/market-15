@@ -25,3 +25,9 @@ $color-black: #111111;
 $color-point: #2ac1bc;
 $color-main: #1a7cff;
 $color-error: #f52926;
+
+@mixin container-box() {
+  box-shadow: 18px 15px #00000020;
+  border: 1px solid $color-gray-700;
+  border-radius: 4px;
+}

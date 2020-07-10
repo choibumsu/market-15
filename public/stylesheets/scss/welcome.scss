@@ -7,10 +7,10 @@
   height: 100vh;
 
   .wrap {
-    border: 1px solid $color-gray-700;
-    max-width: 400px;
+    @include container-box();
+    max-width: 440px;
     background-color: $color-white;
-    padding: 40px;
+    padding: 40px 55px;
     margin-bottom: 30px;
 
     .title {

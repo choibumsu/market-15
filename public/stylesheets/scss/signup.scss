@@ -6,9 +6,9 @@ body {
 }
 
 #signup-container {
+  @include container-box();
   width: 387px;
   padding: 30px;
-  border: 1px solid $color-gray-700;
   margin: 100px 0;
   background-color: $color-white;
 

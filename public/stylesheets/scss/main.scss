@@ -7,7 +7,7 @@
   height: 100vh;
 
   .wrap {
-    border: 1px solid $color-gray-700;
+    @include container-box();
     width: 402px;
     padding: 30px 35px;
     background-color: $color-white;
