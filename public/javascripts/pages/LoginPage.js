@@ -86,6 +86,7 @@ export default function LoginPage(props) {
 
     if (response.status === 200) {
       this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
+      alert('로그인에 성공하였습니다.')
       window.location = `https://ceo.baemin.com/`
 
       if (this.$saveIdCheckBox.checked) {
