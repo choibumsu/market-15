@@ -67,6 +67,40 @@
 - levelDB
 - pug(template engine)
 
+## 🏃‍♂️Quick Start
+
+### Clone & Install packages
+```bash
+git clone https://github.com/woowa-techcamp-2020/market-15.git
+
+cd market-15
+
+npm install
+```
+
+
+### Add secret key file
+
+Insert `secrets.js` to `src/config`
+
+```javascript
+/* src/config/secrets.js */
+
+const SECRET_KEYS = {
+  SESSION_KEY: 'your-secret-key',
+}
+
+module.exports = { SECRET_KEYS }
+```
+
+
+### Run express server
+```bash
+npm run dev
+```
+Then, you can access to your server [http://localhost:4000] or [http:127.0.0.1:4000]
+
+
 ## 🐣 Project init setting
 
 ### Express
