@@ -24,16 +24,14 @@ export default function LoginPage(props) {
 
   this.init = () => {
     this.$loginForm = document.querySelector(loginFormSelector)
-    this.$inputs = Array.from(
-      this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
-    )
+    this.$errorNode = this.$loginForm.querySelector('.error-message')
+
+    const $idInput = this.$loginForm.querySelector('input[name=id]')
+    const $passwordInput = $idInput.nextElementSibling
+    this.$inputs = [$idInput, $passwordInput]
 
     this.$inputs.forEach(($input) => {
-      $input.addEventListener('keyup', (event) => {
-        if (event.key === KEY_NAME.ENTER) {
-          this.sendLoginRequest()
-        }
-      })
+      $input.addEventListener('keyup', onSendLoginRequestHandler)
     })
 
     this.$errorNode = this.$loginForm.querySelector('.error-message')
