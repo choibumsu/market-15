@@ -11,8 +11,9 @@ import {
   AddressForm,
   TermForm,
 } from '../components/join/index.js'
-import { Timer } from '../components/common/index.js'
+import { Timer, Button } from '../components/common/index.js'
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
+import api from '../apis/api.js'
 
 function JoinPage(props) {
   if (new.target !== JoinPage) {
@@ -25,7 +26,6 @@ function JoinPage(props) {
     this.formValue = {
       id: '',
       password: '',
-      passwordConfirm: '',
       emailPrefix: '',
       emailSuffix: '',
       phone: '',
@@ -85,7 +85,10 @@ function JoinPage(props) {
       selector: `.${CLASS_NAME.TERM_FORM_CLASS}`,
       updateFormValue: this.setState,
     })
-
+    this.$term = new Button({
+      selector: `.${CLASS_NAME.WOOWA_BUTTON_CLASS}`,
+      onClickHandler: this.handleSubmit,
+    })
     this.bindEvent()
   }
 
@@ -119,6 +122,37 @@ function JoinPage(props) {
     }
     this.timer.setCount()
     this.$phoneAuthInput.render()
+  }
+
+  this.handleSubmit = async () => {
+    const { isEssentialTerm } = this.formValue
+    const components = [
+      '$idInput',
+      '$passwordInput',
+      '$passwordConfirmInput',
+      '$nameInput',
+      '$emailPrefixInput',
+      '$emailSuffixInput',
+      '$phoneInput',
+    ]
+    let hasError = false
+    components.forEach((component) => {
+      const isValid = this[component].validate()
+      if (!isValid) {
+        hasError = true
+      }
+    })
+    if (hasError) {
+      console.log('hasError', hasError)
+      return
+    }
+    if (!this.formValue.isEssentialTerm) {
+      return alert('필수 약관을 동의해주세요.')
+    }
+    delete this.formValue.isEssentialTerm
+    await api.requestJoin(this.formValue)
+    // const { name, id, email, phone, isOptionalTerm } = this.formValue
+    window.location.href = `/join/success/${this.formValue.id}`
   }
 
   this.init()

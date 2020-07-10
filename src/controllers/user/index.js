@@ -2,7 +2,7 @@ const {
   postUserAuthController,
   postRegisterController,
   getUserOneController,
-  postUserDuplicationController
+  postUserDuplicationController,
 } = require('./user-ctrl')
 const express = require('express')
 const router = express.Router()

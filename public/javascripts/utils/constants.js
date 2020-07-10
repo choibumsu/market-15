@@ -21,4 +21,5 @@ export const CLASS_NAME = {
   DISPLAY_NONE_CLASS: 'dp-none',
   TERM_FORM_CLASS: 'term-form',
   ADDRESS_FORM_CLASS: 'address-form',
+  WOOWA_BUTTON_CLASS: 'woowa-btn',
 }

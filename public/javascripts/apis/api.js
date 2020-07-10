@@ -24,6 +24,9 @@ const api = (() => {
     checkIdDuplication(id) {
       return request('/user/duplicatuon', METHOD.POST({ id }))
     },
+    requestJoin(args) {
+      return request('/user', METHOD.POST(args))
+    },
   }
 })()
 

@@ -45,7 +45,7 @@ main#signup-container
       .time-input-wrapper
         input.short(type='tel' name='phoneAuth' data-type='$phoneAuthInput' placeholder='인증번호 6자리 입력')
         .time 02:00
-      button.input-button.phone-auth-btn.active 확인
+      button.input-button.phone-auth-btn.active(type='button') 확인
       .error-message 예시 에러 메세지입니다.
     ul.auth-help-messages
       li · 인증번호 전송은 통신사에 따라 최대 1분까지 소요될 수 있습니다.
@@ -57,7 +57,7 @@ main#signup-container
       .term-link 내용보기
     .input-wrapper.button-input-wrapper
       input.short(disabled='' type='number' name='postal' data-type='postalCode' placeholder='우편번호')
-      button.input-button.address-search-btn 주소찾기
+      button.input-button.address-search-btn(type='button') 주소찾기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
       input(disabled='' type='text' name='address' data-type='address' placeholder='주소')
