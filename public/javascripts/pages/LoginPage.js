@@ -84,8 +84,6 @@ export default function LoginPage(props) {
       this.$passwordInput.value
     )
 
-    console.log(e)
-
     if (response.status === 200) {
       this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
       window.location = `https://ceo.baemin.com/`
