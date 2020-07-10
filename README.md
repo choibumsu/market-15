@@ -98,7 +98,7 @@ module.exports = { SECRET_KEYS }
 ```bash
 npm run dev
 ```
-Then, you can access to your server [http://localhost:4000] or [http:127.0.0.1:4000]
+Then, you can access to your server http://localhost:4000 or http://127.0.0.1:4000
 
 
 ## 🐣 Project init setting
