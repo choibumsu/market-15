@@ -10,47 +10,47 @@
 ## 😆 프로젝트 구조
 
 ```bash
-|--	MARKET-15
-		|-- public
+|--MARKET-15
+|-- public
         |-- fonts
-        		...
+        	...
         |-- images
-        		...
+        	...
         |-- stylesheets
-        		|-- css
-        				... // 컴파일된 scss파일 저장
-        		|-- scss
-        				... // scss 파일들
+        	|-- css
+		    ... // 컴파일된 scss파일 저장
+        	|-- scss
+        	    ... // scss 파일들
         |-- javascripts
-        		|-- pages
-        				... // page 관련 컴포넌트
-        		|-- components
-        				|-- common
-        						... // 공통 컴포넌트
-        				|-- join
-                		... // join page component
-        		|-- utils
-        				.. // utils functions
-        		|-- api
-        				.. // api 관련
-    |-- src
-        |-- config
-        		|-- db.js // db config
-        |-- controllers
-            |-- main
-            		|-- index.js // API 라우팅 함수
-            		|-- main-ctrl.js // 컨트롤러 콜백함수
-            |-- user
-            		|-- index.js
-            		|-- user-ctrl.js
-        |-- model
-        		|-- user.js
-        |-- routes
-        		|-- index.js // pug 파일 serving 함수
-        |-- utils
-        		|-- constants.js //상수
-        |-- views
-        		... pug 파일들
+	    |-- pages
+        	... // page 관련 컴포넌트
+            |-- components
+        	|-- common
+        	    ... // 공통 컴포넌트
+        	|-- join
+                    ... // join page component
+        	|-- utils
+        	    .. // utils functions
+        	|-- api
+        	    .. // api 관련
+|-- src
+    |-- config
+	|-- db.js // db config
+    |-- controllers
+        |-- main
+	    |-- index.js // API 라우팅 함수
+	    |-- main-ctrl.js // 컨트롤러 콜백함수
+    |-- user
+	|-- index.js
+	|-- user-ctrl.js
+    |-- model
+	|-- user.js
+    |-- routes
+	|-- index.js // pug 파일 serving 함수
+    |-- utils
+	|-- constants.js //상수
+    |-- views
+	... pug 파일들
 
 ```
 
