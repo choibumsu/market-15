@@ -29,10 +29,10 @@
         	    ... // 공통 컴포넌트
         	|-- join
                     ... // join page component
-        	|-- utils
-        	    .. // utils functions
-        	|-- api
-        	    .. // api 관련
+	    |-- utils
+	        .. // utils functions
+	    |-- api
+	        .. // api 관련
 |-- src
     |-- config
 	|-- db.js // db config
