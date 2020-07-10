@@ -17,11 +17,6 @@ export default function EmailSuffixInput({ selector, updateFormValue }) {
     this.bindEvent()
   }
 
-  this.renderErrorNode = () => {
-    this.$inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
-    this.$errorNode.innerHTML = this.errorMessage
-  }
-
   this.validate = async () => {
     const { value } = this.$target
     this.errorMessage = null

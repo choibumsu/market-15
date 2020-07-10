@@ -17,11 +17,6 @@ export default function PasswordConfirmInput(props) {
     this.$errorNode = $errorNode
   }
 
-  this.renderErrorNode = () => {
-    this.$inputWrapper.classList.add(CLASS_NAME.ERROR_CLASS)
-    this.$errorNode.innerHTML = this.errorMessage
-  }
-
   this.validate = () => {
     const { value } = this.$target
 
