@@ -27,7 +27,3 @@ export const CLASS_NAME = {
 export const KEY_NAME = {
   ENTER: 'Enter',
 }
-
-export const KEY_NAME = {
-  ENTER: 'Enter',
-}
