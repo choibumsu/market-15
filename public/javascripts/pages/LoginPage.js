@@ -12,6 +12,7 @@ const ERROR_CASES = {
     lengthOver: '비밀번호는 100자를 넘을 수 없습니다.',
   },
   common: '아이디와 비밀번호를 확인 후 다시 로그인해주세요.',
+  unexcepted: '예상치 못한 오류가 발생했습니다. 새로고침 후 로그인해주세요.',
 }
 
 export default function LoginPage(props) {
@@ -23,27 +24,27 @@ export default function LoginPage(props) {
 
   this.init = () => {
     this.$loginForm = document.querySelector(loginFormSelector)
-    this.$inputs = Array.from(
-      this.$loginForm.querySelectorAll('input[name=id], input[name=password]')
-    )
+    this.$errorNode = this.$loginForm.querySelector('.error-message')
+
+    const $idInput = this.$loginForm.querySelector('input[name=id]')
+    const $passwordInput = $idInput.nextElementSibling
+    this.$inputs = [$idInput, $passwordInput]
 
     this.$inputs.forEach(($input) => {
-      $input.addEventListener('keyup', (event) => {
-        if (event.key === KEY_NAME.ENTER) {
-          this.sendLoginRequest()
-        }
-      })
+      $input.addEventListener('keyup', onSendLoginRequestHandler)
     })
-
-    this.$errorNode = this.$loginForm.querySelector('.error-message')
 
     new Button({
       selector: '.woowa-btn',
-      onClickHandler: () => this.sendLoginRequest(),
+      onClickHandler: (e) => onSendLoginRequestHandler(e),
     })
   }
 
-  this.sendLoginRequest = async () => {
+  const onSendLoginRequestHandler = async (e) => {
+    if (e.type === 'keyup' && e.key !== KEY_NAME.ENTER) {
+      return
+    }
+
     const inputValues = {}
     const errorMessages = this.$inputs.reduce((errorMessages, $input) => {
       inputValues[$input.name] = $input.value
@@ -62,7 +63,11 @@ export default function LoginPage(props) {
     }
 
     const response = await api.requestLogin(inputValues)
-    if (response.status === 404) {
+    if (response.status === 200) {
+      this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
+      window.location = `https://ceo.baemin.com/`
+      return
+    } else if (response.status === 404) {
       this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
       this.$errorNode.innerHTML = ERROR_CASES.common
 
@@ -73,8 +78,8 @@ export default function LoginPage(props) {
       return
     }
 
-    this.$loginForm.classList.remove(CLASS_NAME.ERROR_CLASS)
-    window.location = '/'
+    this.$loginForm.classList.add(CLASS_NAME.ERROR_CLASS)
+    this.$errorNode.innerHTML = ERROR_CASES.unexcepted
   }
 
   this.init()
