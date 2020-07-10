@@ -23,3 +23,7 @@ export const CLASS_NAME = {
   ADDRESS_FORM_CLASS: 'address-form',
   WOOWA_BUTTON_CLASS: 'woowa-btn',
 }
+
+export const KEY_NAME = {
+  ENTER: 'Enter',
+}
