@@ -29,6 +29,11 @@ function JoinPage(props) {
       emailPrefix: '',
       emailSuffix: '',
       phone: '',
+      postalCode: '',
+      address: '',
+      addressDetail: '',
+      isEssentialTerm: false,
+      isOptionalTerm: false,
     }
     this.$essentialForm = document.querySelector(sectionOneSelector)
     this.$idInput = new IdInput({
