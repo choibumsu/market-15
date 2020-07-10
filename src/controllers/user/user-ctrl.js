@@ -16,7 +16,7 @@ exports.postUserAuthController = async (req, res, next) => {
     }
 
     req.session.userId = id
-    res.status(200).json({ name: user.name })
+    res.status(200).json({ id: user.id })
   } catch (e) {
     console.log(e)
     next(e)
