@@ -11,8 +11,9 @@ import {
   AddressForm,
   TermForm,
 } from '../components/join/index.js'
-import { Timer } from '../components/common/index.js'
+import { Timer, Button } from '../components/common/index.js'
 import { TAG_NAME, CLASS_NAME } from '../utils/constants.js'
+import api from '../apis/api.js'
 
 function JoinPage(props) {
   if (new.target !== JoinPage) {
@@ -25,11 +26,17 @@ function JoinPage(props) {
     this.formValue = {
       id: '',
       password: '',
-      passwordConfirm: '',
       emailPrefix: '',
       emailSuffix: '',
       phone: '',
+      postalCode: '',
+      address: '',
+      addressDetail: '',
+      isEssentialTerm: false,
+      isOptionalTerm: false,
     }
+    this.verrifyPhoneInput = false // 인풋 인증했는지 check
+
     this.$essentialForm = document.querySelector(sectionOneSelector)
     this.$idInput = new IdInput({
       selector: 'input[name=id]',
@@ -71,14 +78,20 @@ function JoinPage(props) {
       selector: 'input[name=phoneAuth]',
       updateFormValue: this.setState,
       stopTimer: this.timer.deleteCount,
+      disablePhoneInput: this.disablePhoneInput,
     })
     this.$addressForm = new AddressForm({
       selector: `.${CLASS_NAME.ADDRESS_FORM_CLASS}`,
+      updateFormValue: this.setState,
     })
     this.$termForm = new TermForm({
       selector: `.${CLASS_NAME.TERM_FORM_CLASS}`,
+      updateFormValue: this.setState,
     })
-
+    this.$term = new Button({
+      selector: `.${CLASS_NAME.WOOWA_BUTTON_CLASS}`,
+      onClickHandler: this.handleSubmit,
+    })
     this.bindEvent()
   }
 
@@ -102,7 +115,10 @@ function JoinPage(props) {
   this.onChangeSelectTag = ({ target }) => {
     this.$emailSuffixInput.setState(target.value)
   }
-
+  this.disablePhoneInput = () => {
+    this.$phoneInput.disable()
+    this.verrifyPhoneInput = true
+  }
   this.displayPhoneAuthInput = () => {
     alert(
       '인증번호를 발송했습니다.\n 휴대폰 SMS 발송된 인증번호를 확인해 주세요.'
@@ -114,14 +130,46 @@ function JoinPage(props) {
     this.$phoneAuthInput.render()
   }
 
+  this.handleSubmit = async () => {
+    const components = [
+      '$idInput',
+      '$passwordInput',
+      '$passwordConfirmInput',
+      '$nameInput',
+      '$emailPrefixInput',
+      '$emailSuffixInput',
+      '$phoneInput',
+    ]
+    let hasError = false
+    components.forEach((component) => {
+      const isValid = this[component].validate()
+      if (!isValid) {
+        hasError = true
+      }
+    })
+    if (hasError) {
+      console.log('hasError', hasError)
+      return
+    }
+    if (!this.verrifyPhoneInput) {
+      this.$phoneInput.renderNeedCertificationComplete()
+      return
+    } // 휴대폰 인증x
+    if (!this.formValue.isEssentialTerm) {
+      return alert('필수 약관을 동의해주세요.')
+    }
+    delete this.formValue.isEssentialTerm
+    await api.requestJoin(this.formValue)
+    // const { name, id, email, phone, isOptionalTerm } = this.formValue
+    window.location.href = `/join/success/${this.formValue.id}`
+  }
+
   this.init()
 }
 
-
-
 try {
-  new JoinPage({ 
-    sectionOneSelector: '.essential-form', 
+  new JoinPage({
+    sectionOneSelector: '.essential-form',
   })
 } catch (e) {
   console.error(e)

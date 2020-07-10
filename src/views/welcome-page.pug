@@ -12,29 +12,31 @@ main.main
       strong 회원이 되셨습니다.
     a.nav-main(href='/') 메인으로 →
     article.user-info
-      h3.sub-title.first-child 회원정보
-      .info-item
-        .key 이름
-        .value 홍동욱
-      .info-item
-        .key 아이디;
-        .value donguk
-      .info-item
-        .key 이메일
-        .value mbxd1@naver.com
-      .info-item
-        .key 휴대폰
-        .value 01086690448
-      h3.sub-title 광고성 정보 수신 동의 안내;
-      .info-item
-        .key 전송자
-        .value 배민사장님광장
-      .info-item
-        .key 처리날짜
-        .value 2020-07-08
-      .info-item
-        .key 처리결과
-        .value 수신거부 처리완료
+      .info-wrapper  
+        h3.sub-title 회원정보
+        .info-item
+          .key 이름
+          .value #{name}
+        .info-item
+          .key 아이디
+          .value #{id}
+        .info-item
+          .key 이메일
+          .value #{emailPrefix}@#{emailSuffix}
+        .info-item
+          .key 휴대폰
+          .value #{phone}
+      .info-wrapper
+        h3.sub-title 광고성 정보 수신 동의 안내
+        .info-item
+          .key 전송자
+          .value 배민사장님광장
+        .info-item
+          .key 처리날짜
+          .value 2020-07-10
+        .info-item
+          .key 처리결과
+          .value #{isOptionalTerm ? '수신동의' : '수신거부 처리완료'}
     .desc
       | · 위 내용은
       a(href='https://www.youtube.com/channel/UC-mOekGSesms0agFntnQang') 내 정보 관리

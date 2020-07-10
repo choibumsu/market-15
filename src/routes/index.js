@@ -1,12 +1,20 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../config/db')
 
-router.get('/join/:path', (req, res) => {
-  const { path } = req.params
+router.get('/join/:path/:id', async (req, res) => {
+  const { path, id } = req.params
   if (path === 'success') {
-    res.render('welcome-page')
+    try {
+      const user = await db.get(id)
+      console.log(user)
+      res.render('welcome-page', user)
+    } catch (e) {
+      console.error(e)
+    }
+    return
   }
-  res.render('join-test')
+  res.render('main-page')
 })
 
 router.get('/join', (req, res) => {

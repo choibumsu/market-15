@@ -7,7 +7,7 @@ export default function PhoneAuthInput(props) {
     return new PhoneAuthInput(props)
   }
 
-  const { selector, updateFormValue, stopTimer } = props
+  const { selector, updateFormValue, stopTimer, disablePhoneInput } = props
   this.init = () => {
     this.updateFormValue = updateFormValue
     const { $target, $inputWrapper, $errorNode } = getSubNodes(selector)
@@ -33,7 +33,7 @@ export default function PhoneAuthInput(props) {
     }
     if (this.errorMessage) {
       this.renderErrorNode()
-      return
+      return false
     }
     // success
     this.$inputWrapper.classList.remove(CLASS_NAME.ERROR_CLASS) // error 클래스 남아있을 수 있으니
@@ -52,6 +52,7 @@ export default function PhoneAuthInput(props) {
         // 임시 비밀번호
         this.$inputWrapper.classList.add(CLASS_NAME.DISPLAY_NONE_CLASS)
         stopTimer()
+        disablePhoneInput()
       }
     }
 

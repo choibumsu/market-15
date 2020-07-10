@@ -35,11 +35,12 @@ export default function NameInput({ selector, updateFormValue }) {
     }
     if (this.errorMessage) {
       this.renderErrorNode()
-      return
+      return false
     }
 
     // success
     this.$inputWrapper.classList.remove(CLASS_NAME.ERROR_CLASS) // error 클래스 남아있을 수 있으니
+    return true
   }
 
   this.bindEvent = () => {

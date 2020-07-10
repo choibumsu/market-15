@@ -1,8 +1,8 @@
 import { TAG_NAME } from '../../utils/constants.js'
 
-export default function TermForm({ selector }) {
+export default function TermForm({ selector, updateFormValue }) {
   if (new.target !== TermForm) {
-    return new TermForm({ selector })
+    return new TermForm({ selector, updateFormValue })
   }
 
   this.init = () => {
@@ -29,8 +29,12 @@ export default function TermForm({ selector }) {
         termKeys.forEach(
           (key) => (this.$terms[key].checked = this.$terms.all.checked)
         )
+        updateFormValue('isOptionalTerm', this.$terms.all.checked)
+        updateFormValue('isEssentialTerm', this.$terms.all.checked)
+        return
       }
-
+      updateFormValue('isOptionalTerm', this.$terms.optional.checked)
+      updateFormValue('isEssentialTerm', this.$terms.essential.checked)
       this.$terms.all.checked = termKeys.reduce((isAllChekced, key) => {
         if (key !== 'all')
           isAllChekced = isAllChekced && this.$terms[key].checked

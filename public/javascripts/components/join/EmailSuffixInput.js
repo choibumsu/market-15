@@ -55,6 +55,7 @@ export default function EmailSuffixInput({ selector, updateFormValue }) {
       return
     }
     this.$target.value = emailSuffixValue
+    this.updateFormValue('emailSuffix', emailSuffixValue)
     this.$target.disabled = true
   }
 

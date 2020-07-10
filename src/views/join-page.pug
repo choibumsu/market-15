@@ -39,13 +39,13 @@ main#signup-container
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper
       input.short(type='tel' name='phone' data-type='$phoneInput' placeholder='휴대폰*')
-      button.input-button.phone-auth-btn 인증받기
+      button.input-button.phone-auth-btn(type='button') 인증받기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper.button-input-wrapper.dp-none
       .time-input-wrapper
         input.short(type='tel' name='phoneAuth' data-type='$phoneAuthInput' placeholder='인증번호 6자리 입력')
         .time 02:00
-      button.input-button.phone-auth-btn.active 확인
+      button.input-button.phone-auth-btn.active(type='button') 확인
       .error-message 예시 에러 메세지입니다.
     ul.auth-help-messages
       li · 인증번호 전송은 통신사에 따라 최대 1분까지 소요될 수 있습니다.
@@ -56,14 +56,14 @@ main#signup-container
       label.option-label(for='address-check') 선택 정보를 입력하시겠어요?
       .term-link 내용보기
     .input-wrapper.button-input-wrapper
-      input.short(disabled='' type='number' name='postal' placeholder='우편번호')
-      button.input-button.address-search-btn 주소찾기
+      input.short(disabled='' type='number' name='postal' data-type='postalCode' placeholder='우편번호')
+      button.input-button.address-search-btn(type='button') 주소찾기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(disabled='' type='text' name='address' placeholder='주소')
+      input(disabled='' type='text' name='address' data-type='address' placeholder='주소')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(disabled='' type='text' name='address-detail' placeholder='상세주소')
+      input(disabled='' type='text' name='address-detail' data-type='addressDetail' placeholder='상세주소')
       .error-message 예시 에러 메세지입니다.
     .preview-wrapper.dp-none
       .address-label 지번
