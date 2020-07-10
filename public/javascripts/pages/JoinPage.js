@@ -74,9 +74,11 @@ function JoinPage(props) {
     })
     this.$addressForm = new AddressForm({
       selector: `.${CLASS_NAME.ADDRESS_FORM_CLASS}`,
+      updateFormValue: this.setState,
     })
     this.$termForm = new TermForm({
       selector: `.${CLASS_NAME.TERM_FORM_CLASS}`,
+      updateFormValue: this.setState,
     })
 
     this.bindEvent()
@@ -117,11 +119,9 @@ function JoinPage(props) {
   this.init()
 }
 
-
-
 try {
-  new JoinPage({ 
-    sectionOneSelector: '.essential-form', 
+  new JoinPage({
+    sectionOneSelector: '.essential-form',
   })
 } catch (e) {
   console.error(e)

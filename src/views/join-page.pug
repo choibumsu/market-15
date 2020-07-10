@@ -56,14 +56,14 @@ main#signup-container
       label.option-label(for='address-check') 선택 정보를 입력하시겠어요?
       .term-link 내용보기
     .input-wrapper.button-input-wrapper
-      input.short(disabled='' type='number' name='postal' placeholder='우편번호')
+      input.short(disabled='' type='number' name='postal' data-type='postalCode' placeholder='우편번호')
       button.input-button.address-search-btn 주소찾기
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(disabled='' type='text' name='address' placeholder='주소')
+      input(disabled='' type='text' name='address' data-type='address' placeholder='주소')
       .error-message 예시 에러 메세지입니다.
     .input-wrapper
-      input(disabled='' type='text' name='address-detail' placeholder='상세주소')
+      input(disabled='' type='text' name='address-detail' data-type='addressDetail' placeholder='상세주소')
       .error-message 예시 에러 메세지입니다.
     .preview-wrapper.dp-none
       .address-label 지번
